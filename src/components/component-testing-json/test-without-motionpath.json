@@ -1,0 +1,33 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "Welcome to Brew Haven",
+          "animationType": "fadeIn",
+          "fontSize": 110,
+          "color": "#D2691E"
+        },
+        "startFrame": 0,
+        "durationInFrames": 90
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 0,
+          "color": "#FFD700",
+          "fontSize": 140,
+          "prefix": "Only ",
+          "suffix": " Days Left!"
+        },
+        "startFrame": 90,
+        "durationInFrames": 150
+      }
+    ]
+  }
+}

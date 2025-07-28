@@ -1,0 +1,20 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "Testing MotionPath Component",
+          "animationType": "fadeIn",
+          "fontSize": 80,
+          "color": "#FFFFFF"
+        },
+        "startFrame": 0,
+        "durationInFrames": 60
+      }
+    ]
+  }
+}

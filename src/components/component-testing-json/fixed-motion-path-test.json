@@ -1,0 +1,67 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "Welcome to Brew Haven",
+          "animationType": "fadeIn",
+          "fontSize": 110,
+          "color": "#D2691E"
+        },
+        "startFrame": 0,
+        "durationInFrames": 90
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "imageUrl": "https://picsum.photos/id/1067/1920/1080",
+          "zoomIntensity": 0.25,
+          "direction": "in",
+          "fit": "cover"
+        },
+        "startFrame": 90,
+        "durationInFrames": 120
+      },
+      {
+        "component": "GsapTitle",
+        "props": {
+          "text": "Enjoy 20% OFF This Week!",
+          "animationType": "bounce",
+          "color": "#FF6347",
+          "fontSize": 100
+        },
+        "startFrame": 210,
+        "durationInFrames": 90
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 0,
+          "color": "#FFD700",
+          "fontSize": 140,
+          "prefix": "Only ",
+          "suffix": " Days Left!"
+        },
+        "startFrame": 300,
+        "durationInFrames": 150
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "elementText": "🚀",
+          "pathType": "circle",
+          "radius": 150,
+          "autoRotate": true,
+          "duration": 180
+        },
+        "startFrame": 450,
+        "durationInFrames": 180
+      }
+    ]
+  }
+}

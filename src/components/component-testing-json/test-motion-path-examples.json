@@ -1,0 +1,81 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "MotionPath Showcase",
+          "fontSize": 72,
+          "color": "#FFFFFF",
+          "animationType": "fadeIn"
+        },
+        "startFrame": 0,
+        "durationInFrames": 60
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "pathType": "line",
+          "width": 800,
+          "duration": 90,
+          "autoRotate": false,
+          "elementText": "LINEAR",
+          "elementColor": "#00AAFF",
+          "elementSize": 36,
+          "elementShape": "text"
+        },
+        "startFrame": 70,
+        "durationInFrames": 90
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "pathType": "spiral",
+          "radius": 250,
+          "duration": 120,
+          "autoRotate": true,
+          "elementText": "🌟",
+          "elementColor": "#FFD700",
+          "elementSize": 50,
+          "elementShape": "circle"
+        },
+        "startFrame": 170,
+        "durationInFrames": 120
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "svgPath": "M -400,0 C -200,-200 200,-200 400,0 C 200,200 -200,200 -400,0",
+          "duration": 150,
+          "autoRotate": true,
+          "ease": "power1.inOut",
+          "elementText": "CUSTOM",
+          "elementColor": "#FF4444",
+          "elementSize": 32,
+          "elementShape": "square"
+        },
+        "startFrame": 300,
+        "durationInFrames": 150
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "pathType": "circle",
+          "radius": 150,
+          "duration": 60,
+          "autoRotate": false,
+          "elementText": "FAST",
+          "elementColor": "#00FF88",
+          "elementSize": 28,
+          "elementShape": "text",
+          "offsetDistance": 0.25
+        },
+        "startFrame": 460,
+        "durationInFrames": 60
+      }
+    ]
+  }
+}

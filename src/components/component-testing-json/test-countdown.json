@@ -1,0 +1,34 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "Countdown Test",
+          "animationType": "fadeIn",
+          "fontSize": 80,
+          "color": "#FFFFFF"
+        },
+        "startFrame": 0,
+        "durationInFrames": 60
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 0,
+          "color": "#FFD700",
+          "fontSize": 140,
+          "prefix": "Only ",
+          "suffix": " Days Left!",
+          "duration": 150
+        },
+        "startFrame": 60,
+        "durationInFrames": 150
+      }
+    ]
+  }
+}

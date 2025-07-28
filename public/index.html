@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remotion Render Server - Test Interface</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        h2 {
+            color: #555;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        button {
+            background-color: #007acc;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background-color: #005a9e;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .job-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .job-item {
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: white;
+        }
+        .job-item.completed {
+            border-left: 4px solid #28a745;
+        }
+        .job-item.in-progress {
+            border-left: 4px solid #007bff;
+        }
+        .job-item.failed {
+            border-left: 4px solid #dc3545;
+        }
+        .job-item.queued {
+            border-left: 4px solid #ffc107;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #e9ecef;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 5px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background-color: #007bff;
+            transition: width 0.3s ease;
+        }
+        .video-link {
+            color: #007acc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .video-link:hover {
+            text-decoration: underline;
+        }
+        .component-docs {
+            max-height: 300px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        .example-button {
+            background-color: #28a745;
+            font-size: 14px;
+            padding: 8px 15px;
+        }
+        .example-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎬 Remotion Render Server - Test Interface</h1>
+        
+        <div class="section">
+            <h2>📚 Available Components</h2>
+            <button onclick="loadComponents()">Load Component Documentation</button>
+            <div id="componentDocs" class="component-docs"></div>
+        </div>
+
+        <div class="section">
+            <h2>🎨 Create Video</h2>
+            <p>Paste your JSON configuration below and click "Render Video" to create a video.</p>
+            
+            <div>
+                <button class="example-button" onclick="loadExample()">Load Example JSON</button>
+                <button class="example-button" onclick="loadSimpleExample()">Load Simple Example</button>
+                <button class="example-button" onclick="clearJSON()">Clear</button>
+            </div>
+            
+            <textarea id="jsonInput" placeholder="Paste your video JSON configuration here..."></textarea>
+            
+            <div>
+                <button onclick="validateJSON()">Validate JSON</button>
+                <button onclick="renderVideo()" id="renderBtn">Render Video</button>
+            </div>
+            
+            <div id="renderStatus"></div>
+        </div>
+
+        <div class="section">
+            <h2>📊 Render Jobs</h2>
+            <button onclick="refreshJobs()">Refresh Jobs</button>
+            <button onclick="clearCompletedJobs()">Clear Completed</button>
+            
+            <div id="jobsList" class="job-list">
+                <p>Click "Refresh Jobs" to see render status...</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🔧 Server Status</h2>
+            <button onclick="checkServerHealth()">Check Server Health</button>
+            <div id="serverStatus"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3000';
+        let jobs = new Map();
+
+        // Load component documentation
+        async function loadComponents() {
+            try {
+                const response = await fetch(`${API_BASE}/components`);
+                const data = await response.json();
+                
+                document.getElementById('componentDocs').innerHTML = `
+                    <h3>Available Components: ${data.components.join(', ')}</h3>
+                    <pre>${data.documentation}</pre>
+                `;
+            } catch (error) {
+                showStatus('error', `Failed to load components: ${error.message}`);
+            }
+        }
+
+        // Load example JSON
+        function loadExample() {
+            const exampleJSON = {
+                "dynamicData": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "TitleCard",
+                            "props": {
+                                "text": "Hello AI World",
+                                "animationType": "slideUp",
+                                "color": "#00FF88",
+                                "fontSize": 110
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 90
+                        },
+                        {
+                            "component": "GsapTitle",
+                            "props": {
+                                "text": "GSAP POWER",
+                                "animationType": "stagger",
+                                "color": "#FF6B35",
+                                "fontSize": 80
+                            },
+                            "startFrame": 90,
+                            "durationInFrames": 120
+                        },
+                        {
+                            "component": "CountdownTimer",
+                            "props": {
+                                "startNumber": 5,
+                                "endNumber": 1,
+                                "suffix": "!",
+                                "color": "#FFD23F",
+                                "fontSize": 150
+                            },
+                            "startFrame": 210,
+                            "durationInFrames": 150
+                        }
+                    ]
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(exampleJSON, null, 2);
+        }
+
+        // Load simple example
+        function loadSimpleExample() {
+            const simpleJSON = {
+                "dynamicData": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "TitleCard",
+                            "props": {
+                                "text": "Simple Video Test",
+                                "animationType": "fadeIn"
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 120
+                        }
+                    ]
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(simpleJSON, null, 2);
+        }
+
+        // Clear JSON input
+        function clearJSON() {
+            document.getElementById('jsonInput').value = '';
+        }
+
+        // Validate JSON
+        function validateJSON() {
+            const jsonText = document.getElementById('jsonInput').value;
+            try {
+                const parsed = JSON.parse(jsonText);
+                if (parsed.dynamicData && parsed.dynamicData.timeline) {
+                    showStatus('success', 'JSON is valid! ✅');
+                } else {
+                    showStatus('error', 'JSON is valid but missing required structure (dynamicData.timeline)');
+                }
+            } catch (error) {
+                showStatus('error', `Invalid JSON: ${error.message}`);
+            }
+        }
+
+        // Render video
+        async function renderVideo() {
+            const jsonText = document.getElementById('jsonInput').value;
+            if (!jsonText.trim()) {
+                showStatus('error', 'Please enter JSON configuration');
+                return;
+            }
+
+            try {
+                const jsonData = JSON.parse(jsonText);
+                
+                document.getElementById('renderBtn').disabled = true;
+                showStatus('info', 'Submitting render job...');
+
+                const response = await fetch(`${API_BASE}/renders`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: jsonText
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showStatus('success', `Render job created! Job ID: ${result.jobId}`);
+                    jobs.set(result.jobId, { status: 'queued', createdAt: new Date() });
+                    setTimeout(refreshJobs, 1000);
+                } else {
+                    showStatus('error', `Render failed: ${result.message}`);
+                }
+            } catch (error) {
+                showStatus('error', `Error: ${error.message}`);
+            } finally {
+                document.getElementById('renderBtn').disabled = false;
+            }
+        }
+
+        // Refresh jobs
+        async function refreshJobs() {
+            const jobsList = document.getElementById('jobsList');
+            let html = '';
+
+            for (const [jobId, jobInfo] of jobs.entries()) {
+                try {
+                    const response = await fetch(`${API_BASE}/renders/${jobId}`);
+                    const job = await response.json();
+                    
+                    if (job) {
+                        jobs.set(jobId, job);
+                        html += createJobHTML(jobId, job);
+                    }
+                } catch (error) {
+                    html += `<div class="job-item failed">
+                        <strong>Job ${jobId}</strong> - Error loading status
+                    </div>`;
+                }
+            }
+
+            if (html === '') {
+                html = '<p>No render jobs found. Create a video to see jobs here.</p>';
+            }
+
+            jobsList.innerHTML = html;
+        }
+
+        // Create job HTML
+        function createJobHTML(jobId, job) {
+            let statusClass = job.status || 'unknown';
+            let progressHTML = '';
+            let videoLink = '';
+
+            if (job.status === 'in-progress' && job.progress !== undefined) {
+                progressHTML = `
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${job.progress * 100}%"></div>
+                    </div>
+                    <small>Progress: ${Math.round(job.progress * 100)}%</small>
+                `;
+            }
+
+            if (job.status === 'completed' && job.videoUrl) {
+                videoLink = `<p><a href="${job.videoUrl}" class="video-link" target="_blank">📹 Download Video</a></p>`;
+            }
+
+            if (job.status === 'failed' && job.error) {
+                progressHTML = `<p style="color: red;">Error: ${job.error.message}</p>`;
+            }
+
+            return `
+                <div class="job-item ${statusClass}">
+                    <strong>Job ID:</strong> ${jobId}<br>
+                    <strong>Status:</strong> ${job.status || 'Unknown'}<br>
+                    <strong>Created:</strong> ${jobs.get(jobId)?.createdAt?.toLocaleString() || 'Unknown'}
+                    ${progressHTML}
+                    ${videoLink}
+                </div>
+            `;
+        }
+
+        // Clear completed jobs
+        function clearCompletedJobs() {
+            for (const [jobId, job] of jobs.entries()) {
+                if (job.status === 'completed' || job.status === 'failed') {
+                    jobs.delete(jobId);
+                }
+            }
+            refreshJobs();
+        }
+
+        // Check server health
+        async function checkServerHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                
+                document.getElementById('serverStatus').innerHTML = `
+                    <div class="status success">
+                        ✅ Server is running on port ${data.port}
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('serverStatus').innerHTML = `
+                    <div class="status error">
+                        ❌ Server is not responding. Make sure it's running on port 3000.
+                    </div>
+                `;
+            }
+        }
+
+        // Show status message
+        function showStatus(type, message) {
+            const statusDiv = document.getElementById('renderStatus');
+            statusDiv.innerHTML = `<div class="status ${type}">${message}</div>`;
+            
+            // Auto-hide success messages after 5 seconds
+            if (type === 'success') {
+                setTimeout(() => {
+                    statusDiv.innerHTML = '';
+                }, 5000);
+            }
+        }
+
+        // Auto-refresh jobs every 3 seconds
+        setInterval(() => {
+            if (jobs.size > 0) {
+                refreshJobs();
+            }
+        }, 3000);
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            checkServerHealth();
+            loadComponents();
+        });
+    </script>
+</body>
+</html>

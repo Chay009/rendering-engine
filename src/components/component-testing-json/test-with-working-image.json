@@ -1,0 +1,36 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "timeline": [
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Welcome to Our Product",
+        "animationType": "fadeIn"
+      },
+      "startFrame": 0,
+      "durationInFrames": 90
+    },
+    {
+      "component": "ImageWithZoom",
+      "props": {
+        "imageUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+        "zoomIntensity": 0.3,
+        "direction": "in",
+        "fit": "cover"
+      },
+      "startFrame": 90,
+      "durationInFrames": 120
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Thank You!",
+        "animationType": "slideIn"
+      },
+      "startFrame": 210,
+      "durationInFrames": 90
+    }
+  ]
+}

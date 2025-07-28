@@ -1,0 +1,55 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "MotionPath",
+        "props": {
+          "pathType": "circle",
+          "radius": 300,
+          "duration": 180,
+          "autoRotate": true,
+          "elementText": "🚀",
+          "elementColor": "#FF6347",
+          "elementSize": 60,
+          "elementShape": "circle"
+        },
+        "startFrame": 0,
+        "durationInFrames": 180
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "pathType": "curve",
+          "width": 800,
+          "height": 400,
+          "duration": 120,
+          "autoRotate": false,
+          "ease": "power2.inOut",
+          "elementText": "CURVE",
+          "elementColor": "#00FF00",
+          "elementSize": 40,
+          "elementShape": "text"
+        },
+        "startFrame": 190,
+        "durationInFrames": 120
+      },
+      {
+        "component": "MotionPath",
+        "props": {
+          "svgPath": "M 0,0 Q 200,100 400,0 T 800,0",
+          "duration": 150,
+          "autoRotate": true,
+          "elementText": "★",
+          "elementColor": "#FFD700",
+          "elementSize": 48,
+          "elementShape": "square"
+        },
+        "startFrame": 320,
+        "durationInFrames": 150
+      }
+    ]
+  }
+}

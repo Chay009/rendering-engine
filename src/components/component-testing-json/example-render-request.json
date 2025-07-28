@@ -1,0 +1,64 @@
+{
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "Hello AI World",
+          "animationType": "slideUp",
+          "color": "#00FF88",
+          "fontSize": 110
+        },
+        "startFrame": 0,
+        "durationInFrames": 90
+      },
+      {
+        "component": "GsapTitle",
+        "props": {
+          "text": "GSAP POWER",
+          "animationType": "stagger",
+          "color": "#FF6B35",
+          "fontSize": 80
+        },
+        "startFrame": 90,
+        "durationInFrames": 120
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 1,
+          "suffix": "!",
+          "color": "#FFD23F",
+          "fontSize": 150
+        },
+        "startFrame": 210,
+        "durationInFrames": 150
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "imageUrl": "https://picsum.photos/1920/1080/tech",
+          "direction": "in",
+          "zoomIntensity": 0.4
+        },
+        "startFrame": 360,
+        "durationInFrames": 120
+      },
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "The Future is Now",
+          "animationType": "scale",
+          "color": "#FFFFFF",
+          "fontSize": 96
+        },
+        "startFrame": 480,
+        "durationInFrames": 90
+      }
+    ]
+  }
+}

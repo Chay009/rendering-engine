@@ -1,0 +1,208 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "timeline": [
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "ScrollDrawSVG Component Demo",
+        "animationType": "fadeIn",
+        "fontSize": 64,
+        "color": "#FFFFFF"
+      },
+      "startFrame": 0,
+      "durationInFrames": 60
+    },
+    {
+      "component": "ScrollDrawSVG",
+      "props": {
+        "pathPreset": "wave",
+        "pathComplexity": "medium",
+        "drawingType": "draw-on",
+        "scrollDirection": "vertical",
+        "scrollDistance": 2000,
+        "scrollSpeed": 1,
+        "viewportWidth": 800,
+        "viewportHeight": 600,
+        "drawingDuration": 60,
+        "drawingEase": "power2.out",
+        "staggerDelay": 15,
+        "strokeColor": "#00FF88",
+        "strokeWidth": 3,
+        "backgroundColor": "#000000",
+        "showScrollIndicator": true,
+        "indicatorColor": "#FFFFFF",
+        "duration": 300,
+        "progressiveReveal": true,
+        "scrollThreshold": 0.1
+      },
+      "startFrame": 60,
+      "durationInFrames": 300
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Horizontal Maze with Glow",
+        "animationType": "slideIn",
+        "fontSize": 48,
+        "color": "#00FFFF"
+      },
+      "startFrame": 360,
+      "durationInFrames": 60
+    },
+    {
+      "component": "ScrollDrawSVG",
+      "props": {
+        "pathPreset": "maze",
+        "pathComplexity": "complex",
+        "drawingType": "glow-on",
+        "scrollDirection": "horizontal",
+        "scrollDistance": 1500,
+        "scrollSpeed": 1.2,
+        "viewportWidth": 900,
+        "viewportHeight": 500,
+        "drawingDuration": 80,
+        "drawingEase": "power3.inOut",
+        "staggerDelay": 20,
+        "strokeColor": "#00FFFF",
+        "strokeWidth": 4,
+        "glowColor": "#00FFFF",
+        "backgroundColor": "#001122",
+        "showScrollIndicator": true,
+        "indicatorColor": "#00FFFF",
+        "duration": 400,
+        "progressiveReveal": true,
+        "maxPaths": 8
+      },
+      "startFrame": 420,
+      "durationInFrames": 400
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Custom SVG Paths with Scale-In",
+        "animationType": "fadeIn",
+        "fontSize": 48,
+        "color": "#FF6347"
+      },
+      "startFrame": 820,
+      "durationInFrames": 60
+    },
+    {
+      "component": "ScrollDrawSVG",
+      "props": {
+        "svgPaths": [
+          "M 100,300 Q 300,100 500,300 T 700,300",
+          "M 100,200 L 700,200",
+          "M 100,400 C 200,300 300,500 400,400 C 500,300 600,500 700,400"
+        ],
+        "drawingType": "scale-in",
+        "scrollDirection": "vertical",
+        "scrollDistance": 1800,
+        "scrollSpeed": 0.8,
+        "viewportWidth": 800,
+        "viewportHeight": 600,
+        "drawingDuration": 90,
+        "drawingEase": "elastic.out(1, 0.5)",
+        "staggerDelay": 30,
+        "triggerPoints": [0.2, 0.5, 0.8],
+        "strokeColor": "#FF6347",
+        "strokeWidth": 5,
+        "fillColor": "rgba(255, 99, 71, 0.2)",
+        "backgroundColor": "#1a1a1a",
+        "showScrollIndicator": true,
+        "indicatorColor": "#FF6347",
+        "duration": 360,
+        "progressiveReveal": false
+      },
+      "startFrame": 880,
+      "durationInFrames": 360
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Spiral with Animated Dashes",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#FFD700"
+      },
+      "startFrame": 1240,
+      "durationInFrames": 60
+    },
+    {
+      "component": "ScrollDrawSVG",
+      "props": {
+        "pathPreset": "spiral",
+        "pathComplexity": "complex",
+        "drawingType": "dash-on",
+        "scrollDirection": "vertical",
+        "scrollDistance": 2500,
+        "scrollSpeed": 2,
+        "viewportWidth": 700,
+        "viewportHeight": 700,
+        "drawingDuration": 45,
+        "drawingEase": "power1.inOut",
+        "staggerDelay": 10,
+        "dashPattern": "20 10",
+        "strokeColor": "#FFD700",
+        "strokeWidth": 4,
+        "backgroundColor": "#000033",
+        "showScrollIndicator": true,
+        "indicatorColor": "#FFD700",
+        "duration": 240,
+        "progressiveReveal": true,
+        "scrollThreshold": 0.05
+      },
+      "startFrame": 1300,
+      "durationInFrames": 240
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Zigzag Fade-In Effect",
+        "animationType": "fadeIn",
+        "fontSize": 48,
+        "color": "#9932CC"
+      },
+      "startFrame": 1540,
+      "durationInFrames": 60
+    },
+    {
+      "component": "ScrollDrawSVG",
+      "props": {
+        "pathPreset": "zigzag",
+        "pathComplexity": "simple",
+        "drawingType": "fade-in",
+        "scrollDirection": "horizontal",
+        "scrollDistance": 1200,
+        "scrollSpeed": 1.5,
+        "viewportWidth": 1000,
+        "viewportHeight": 400,
+        "drawingDuration": 50,
+        "drawingEase": "power2.inOut",
+        "staggerDelay": 12,
+        "strokeColor": "#9932CC",
+        "strokeWidth": 6,
+        "backgroundColor": "#0a0a0a",
+        "showScrollIndicator": false,
+        "duration": 180,
+        "progressiveReveal": true,
+        "maxPaths": 6
+      },
+      "startFrame": 1600,
+      "durationInFrames": 180
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "Demo Complete!",
+        "animationType": "scale",
+        "fontSize": 72,
+        "color": "#FFFFFF"
+      },
+      "startFrame": 1780,
+      "durationInFrames": 90
+    }
+  ]
+}
