@@ -2,6 +2,8 @@ import {
   makeCancelSignal,
   renderMedia,
   selectComposition,
+  BrowserInstance,
+  TComposition,
 } from "@remotion/renderer";
 import { randomUUID } from "node:crypto";
 import path from "node:path";
@@ -51,16 +53,14 @@ export const makeRenderQueue = ({
   serveUrl,
   rendersDir,
   browserInstance,
-  compositionCache,
-  cachedComposition,
 }: {
   port: number;
   serveUrl: string;
   rendersDir: string;
   // 🚀 PRODUCTION OPTIMIZATION: Pre-warmed resources
-  browserInstance?: any;
-  compositionCache?: Map<string, any>;
-  cachedComposition?: any;
+  browserInstance?: BrowserInstance;
+  compositionCache?: Map<string, TComposition>;
+  cachedComposition?: TComposition;
 }) => {
   const jobs = new Map<string, JobState>();
   let queue: Promise<unknown> = Promise.resolve();
@@ -101,7 +101,7 @@ export const makeRenderQueue = ({
         console.log(`✅ Validation took: ${Date.now() - validationStart}ms`);
 
         // Calculate the total duration from the timeline
-        const calculateDuration = (timeline: any[]): number => {
+        const calculateDuration = (timeline: VideoRequest['timeline']): number => {
           if (!timeline || timeline.length === 0) return 300;
           return Math.max(...timeline.map(item => item.startFrame + item.durationInFrames));
         };

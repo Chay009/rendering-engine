@@ -7,7 +7,7 @@ import React from 'react';
  * This component is the core of the dynamic renderer. It takes the timeline array
  * and dynamically renders each item in a Remotion Sequence.
  */
-const DynamicVideo: React.FC<VideoRequest> = ({ timeline, width, height, fps }) => {
+const DynamicVideo: React.FC<VideoRequest> = ({ timeline }) => {
   // 🐛 DEBUG: Log what timeline data we're actually receiving
   console.log('🎬 DynamicVideo received timeline:', JSON.stringify(timeline, null, 2));
   console.log('🎬 Timeline length:', timeline?.length || 0);
@@ -47,7 +47,7 @@ const DynamicVideo: React.FC<VideoRequest> = ({ timeline, width, height, fps }) 
             from={item.startFrame}
             durationInFrames={item.durationInFrames}
           >
-            {/* @ts-ignore */}
+            {/* @ts-expect-error - Dynamic component props */}
             <ComponentToRender {...item.props} />
           </Sequence>
         );

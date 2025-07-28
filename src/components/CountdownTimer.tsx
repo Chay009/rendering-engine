@@ -1,4 +1,4 @@
-import { useCurrentFrame, interpolate, useVideoConfig } from 'remotion';
+import { useCurrentFrame, interpolate } from 'remotion';
 import React from 'react';
 
 export interface CountdownTimerProps {

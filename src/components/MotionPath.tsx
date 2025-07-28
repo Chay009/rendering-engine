@@ -120,7 +120,7 @@ export const MotionPath: React.FC<MotionPathProps> = ({
         return `M 0,0 L ${width},0`;
       case 'curve':
         return `M 0,${height/2} Q ${width/2},0 ${width},${height/2}`;
-      case 'spiral':
+      case 'spiral': {
         // Simple spiral approximation using quadratic curves
         const steps = 8;
         let path = `M ${radius},0`;
@@ -134,6 +134,7 @@ export const MotionPath: React.FC<MotionPathProps> = ({
           path += ` Q ${controlX},${controlY} ${x},${y}`;
         }
         return path;
+      }
       default:
         return `M 0,0 L ${width},0`; // Default to line
     }

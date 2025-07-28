@@ -3,14 +3,14 @@ import cors from "cors";
 import { makeRenderQueue } from "./render-queue";
 import { bundle } from "@remotion/bundler";
 import path from "node:path";
-import { ensureBrowser, openBrowser, selectComposition } from "@remotion/renderer";
+import { ensureBrowser, openBrowser, selectComposition, BrowserInstance, TComposition } from "@remotion/renderer";
 import { generateComponentDocs, getAvailableComponents } from "../src/components/registry";
 
 const { PORT = 3000, REMOTION_SERVE_URL } = process.env;
 
 // 🚀 PRODUCTION OPTIMIZATION: Global resources to avoid repetitive operations
-let globalBrowserInstance: any = null;
-const compositionCache = new Map<string, any>();
+let globalBrowserInstance: BrowserInstance | null = null;
+const compositionCache = new Map<string, TComposition>();
 
 function setupApp({ 
   remotionBundleUrl, 
@@ -18,8 +18,8 @@ function setupApp({
   cachedComposition 
 }: { 
   remotionBundleUrl: string;
-  browserInstance: any;
-  cachedComposition: any;
+  browserInstance: BrowserInstance;
+  cachedComposition: TComposition;
 }) {
   const app = express();
 

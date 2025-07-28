@@ -23,7 +23,7 @@ export const GsapTitle: React.FC<GsapTitleProps> = ({
 
     // Split text into characters for stagger animation
     if (animationType === 'stagger') {
-      const chars = text.split('').map((char, i) => 
+      const chars = text.split('').map((char) => 
         `<span style="display: inline-block;">${char === ' ' ? '&nbsp;' : char}</span>`
       ).join('');
       
