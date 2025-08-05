@@ -41,6 +41,9 @@ const DynamicVideo: React.FC<VideoRequest> = ({ timeline }) => {
           );
         }
 
+        // 🚨 DEBUG: Log component rendering details
+        console.log(`🎯 Rendering component "${item.component}" with props:`, item.props);
+        
         return (
           <Sequence
             key={index}

@@ -1,0 +1,46 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "timeline": [
+    {
+      "component": "HyperspaceText",
+      "props": {
+        "customText": "WELCOME TO THE FUTURE",
+        "speed": 1.5,
+        "textColor": "#00FFFF",
+        "backgroundColor": "#000011",
+        "fontSize": 64,
+        "enableGsapEffects": true
+      },
+      "startFrame": 0,
+      "durationInFrames": 300
+    },
+    {
+      "component": "HyperspaceText", 
+      "props": {
+        "texts": ["LOADING...", "ACCESSING DATABASE", "DECRYPTING FILES", "COMPLETE"],
+        "speed": 2,
+        "textColor": "#00FF00",
+        "maxBlur": 15,
+        "fontSize": 48
+      },
+      "startFrame": 300,
+      "durationInFrames": 240
+    },
+    {
+      "component": "HyperspaceText",
+      "props": {
+        "customText": "GAME ON!",
+        "speed": 3,
+        "textColor": "#FF00FF",
+        "backgroundColor": "#110011",
+        "maxBlur": 20,
+        "fontSize": 96,
+        "enableGsapEffects": true
+      },
+      "startFrame": 540,
+      "durationInFrames": 180
+    }
+  ]
+}

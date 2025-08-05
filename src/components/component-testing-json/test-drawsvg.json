@@ -1,0 +1,361 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "timeline": [
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "DrawSVG Component Demo",
+        "animationType": "fadeIn",
+        "fontSize": 72,
+        "color": "#FFFFFF"
+      },
+      "startFrame": 0,
+      "durationInFrames": 60
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "1. Elegant Signature Drawing",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#00FF88"
+      },
+      "startFrame": 60,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "signature",
+        "duration": 180,
+        "animationType": "sequential",
+        "strokeColor": "#00FF88",
+        "strokeWidth": 4,
+        "glowEffect": true,
+        "ease": "power2.out",
+        "backgroundColor": "#000011"
+      },
+      "startFrame": 120,
+      "durationInFrames": 180
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "2. Architectural Blueprint",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#00AAFF"
+      },
+      "startFrame": 300,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "house",
+        "duration": 240,
+        "animationType": "staggered",
+        "strokeColor": "#00AAFF",
+        "strokeWidth": 3,
+        "staggerDelay": 0.3,
+        "splitMultiSegments": true,
+        "ease": "power1.inOut",
+        "backgroundColor": "#001122"
+      },
+      "startFrame": 360,
+      "durationInFrames": 240
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "3. Growing Tree Animation",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#44AA44"
+      },
+      "startFrame": 600,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "tree",
+        "duration": 200,
+        "animationType": "sequential",
+        "strokeColor": "#44AA44",
+        "strokeWidth": 5,
+        "fillColor": "rgba(68, 170, 68, 0.1)",
+        "glowEffect": true,
+        "ease": "power3.out",
+        "backgroundColor": "#000A00"
+      },
+      "startFrame": 660,
+      "durationInFrames": 200
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "4. Circuit Board Pattern",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#00FFFF"
+      },
+      "startFrame": 860,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "circuit",
+        "duration": 220,
+        "animationType": "staggered",
+        "strokeColor": "#00FFFF",
+        "strokeWidth": 2,
+        "staggerDelay": 0.2,
+        "trailEffect": true,
+        "ease": "power2.inOut",
+        "backgroundColor": "#001100"
+      },
+      "startFrame": 920,
+      "durationInFrames": 220
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "5. Handwritten Text Style",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#FF6347"
+      },
+      "startFrame": 1140,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "handwriting",
+        "duration": 160,
+        "animationType": "sequential",
+        "colorGradient": {
+          "start": "#FF6347",
+          "end": "#FFD700"
+        },
+        "strokeWidth": 3,
+        "ease": "power2.out",
+        "backgroundColor": "#110000"
+      },
+      "startFrame": 1200,
+      "durationInFrames": 160
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "6. Modern Logo Design",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#9932CC"
+      },
+      "startFrame": 1360,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "logo",
+        "duration": 180,
+        "animationType": "simultaneous",
+        "strokeColor": "#9932CC",
+        "strokeWidth": 4,
+        "fillColor": "rgba(153, 50, 204, 0.2)",
+        "glowEffect": true,
+        "ease": "elastic.out(1, 0.3)",
+        "backgroundColor": "#000000"
+      },
+      "startFrame": 1420,
+      "durationInFrames": 180
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "7. Technical Blueprint",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#FFFFFF"
+      },
+      "startFrame": 1600,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "blueprint",
+        "duration": 250,
+        "animationType": "staggered",
+        "strokeColor": "#FFFFFF",
+        "strokeWidth": 2,
+        "staggerDelay": 0.15,
+        "ease": "power1.inOut",
+        "backgroundColor": "#003366"
+      },
+      "startFrame": 1660,
+      "durationInFrames": 250
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "8. Abstract Art Design",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#FFD700"
+      },
+      "startFrame": 1910,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "artistic",
+        "duration": 200,
+        "animationType": "sequential",
+        "colorGradient": {
+          "start": "#FFD700",
+          "end": "#FF69B4"
+        },
+        "strokeWidth": 4,
+        "glowEffect": true,
+        "ease": "power2.inOut",
+        "backgroundColor": "#000000"
+      },
+      "startFrame": 1970,
+      "durationInFrames": 200
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "9. Custom Path with Reverse Animation",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#00FF00"
+      },
+      "startFrame": 2170,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathData": "M100,200 Q200,50 300,200 Q400,350 500,200 Q600,50 700,200",
+        "duration": 150,
+        "animationType": "sequential",
+        "strokeColor": "#00FF00",
+        "strokeWidth": 6,
+        "reverseDirection": true,
+        "trailEffect": true,
+        "ease": "power3.inOut",
+        "backgroundColor": "#000000",
+        "width": 800,
+        "height": 400,
+        "viewBox": "0 0 800 400"
+      },
+      "startFrame": 2230,
+      "durationInFrames": 150
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "10. Advanced Effects Demo",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#FF1493"
+      },
+      "startFrame": 2380,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "signature",
+        "duration": 120,
+        "delay": 30,
+        "animationType": "staggered",
+        "strokeColor": "#FF1493",
+        "strokeWidth": 5,
+        "staggerDelay": 0.4,
+        "glowEffect": true,
+        "trailEffect": true,
+        "showOriginal": true,
+        "ease": "bounce.out",
+        "backgroundColor": "#000000"
+      },
+      "startFrame": 2440,
+      "durationInFrames": 180
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "11. Error Handling Test",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#FFA500"
+      },
+      "startFrame": 2620,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathPreset": "nonexistent-preset",
+        "duration": 120,
+        "animationType": "sequential",
+        "strokeColor": "#FFA500",
+        "strokeWidth": 3,
+        "ease": "power2.out",
+        "backgroundColor": "#000000"
+      },
+      "startFrame": 2680,
+      "durationInFrames": 120
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "12. Performance Test - Complex Path",
+        "animationType": "slideUp",
+        "fontSize": 48,
+        "color": "#32CD32"
+      },
+      "startFrame": 2800,
+      "durationInFrames": 60
+    },
+    {
+      "component": "DrawSVG",
+      "props": {
+        "pathData": "M50,300 C100,200 150,400 200,300 C250,200 300,400 350,300 C400,200 450,400 500,300 C550,200 600,400 650,300 C700,200 750,400 800,300 L800,350 C750,450 700,250 650,350 C600,450 550,250 500,350 C450,450 400,250 350,350 C300,450 250,250 200,350 C150,450 100,250 50,350 Z",
+        "duration": 180,
+        "animationType": "sequential",
+        "strokeColor": "#32CD32",
+        "strokeWidth": 4,
+        "fillColor": "rgba(50, 205, 50, 0.1)",
+        "splitMultiSegments": true,
+        "ease": "power2.inOut",
+        "backgroundColor": "#000000",
+        "width": 900,
+        "height": 500,
+        "viewBox": "0 0 900 500"
+      },
+      "startFrame": 2860,
+      "durationInFrames": 180
+    },
+    {
+      "component": "TitleCard",
+      "props": {
+        "text": "DrawSVG Demo Complete!",
+        "animationType": "scale",
+        "fontSize": 72,
+        "color": "#FFFFFF"
+      },
+      "startFrame": 3040,
+      "durationInFrames": 90
+    }
+  ]
+}

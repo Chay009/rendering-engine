@@ -1,0 +1,24 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "durationInFrames": 300,
+  "scenes": [
+    {
+      "type": "component",
+      "component": "GenerativeCanvas",
+      "startFrame": 0,
+      "durationFrames": 300,
+      "props": {
+        "backgroundColor": "#001122",
+        "strokeColor": "#00FFFF",
+        "strokeOpacity": 0.6,
+        "animationSpeed": 1.5,
+        "glowEffect": true,
+        "colorCycle": true,
+        "enableGsapEffects": true,
+        "iterations": 25000
+      }
+    }
+  ]
+}

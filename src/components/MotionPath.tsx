@@ -138,7 +138,7 @@ export const MotionPath: React.FC<MotionPathProps> = ({
       default:
         return `M 0,0 L ${width},0`; // Default to line
     }
-  }, [pathType, radius, width, height]);
+  }, [radius, width, height]);
 
   const createTimeline = useCallback((element: HTMLDivElement) => {
     const timeline = gsap.timeline({ paused: true });
@@ -167,7 +167,7 @@ export const MotionPath: React.FC<MotionPathProps> = ({
     }
 
     // Create the motion path animation
-    const motionConfig: any = {
+    const motionConfig = {
       duration: duration / 30, // Convert frames to seconds
       motionPath: {
         path: finalPath,
@@ -216,9 +216,6 @@ export const MotionPath: React.FC<MotionPathProps> = ({
     duration, 
     autoRotate, 
     ease, 
-    radius, 
-    width, 
-    height, 
     alignOrigin, 
     offsetDistance, 
     motionBlur,

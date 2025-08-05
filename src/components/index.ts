@@ -8,6 +8,9 @@ export { CountdownTimer } from './CountdownTimer';
 export { SlideTransition } from './SlideTransition';
 export { MotionPath } from './MotionPath';
 export { MorphSVGFixed as MorphSVG } from './MorphSVGFixed';
+export { DrawSVG } from './DrawSVG';
+export { HyperspaceText } from './HyperspaceText';
+export { GenerativeCanvas } from './GenerativeCanvas';
 export { MinimalTest } from './MinimalTest'; // Keep for testing
 
 // Component Registry for dynamic lookup - FULL PRODUCTION SET
@@ -19,6 +22,9 @@ export const COMPONENT_REGISTRY = {
   SlideTransition: 'SlideTransition', // ✅ FAST - Basic CSS transitions
   MotionPath: 'MotionPath',         // ✅ NOW FAST - GSAP MotionPathPlugin optimized
   MorphSVG: 'MorphSVG',             // ✅ NOW FAST - GSAP MorphSVGPlugin optimized
+  DrawSVG: 'DrawSVG',               // ✅ NOW FAST - GSAP DrawSVGPlugin optimized
+  HyperspaceText: 'HyperspaceText', // ✅ NEW - 3D hyperspace text effect with GSAP
+  GenerativeCanvas: 'GenerativeCanvas', // ✅ NEW - Mathematical generative art with GSAP
   MinimalTest: 'MinimalTest',       // ✅ FASTEST - For performance testing
 } as const;
 

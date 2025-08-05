@@ -5,7 +5,7 @@ export interface ComponentProp {
   name: string;
   type: string;
   required: boolean;
-  default?: any;
+  default?: unknown;
   description: string;
   options?: string[]; // For enum-like props
 }
@@ -17,7 +17,7 @@ export interface ComponentMeta {
   props: ComponentProp[];
   examples: Array<{
     description: string;
-    props: Record<string, any>;
+    props: Record<string, unknown>;
   }>;
 }
 
@@ -299,6 +299,246 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
     ]
   },
 
+  DrawSVG: {
+    name: 'DrawSVG',
+    description: '🛡️ PRODUCTION-SAFE progressive SVG drawing component using GSAP DrawSVGPlugin with multiple built-in presets and creative effects',
+    category: 'animation',
+    props: [
+      { name: 'pathData', type: 'string', required: false, description: '✅ OPTIONAL: Custom SVG path data string for complex drawings' },
+      { name: 'pathPreset', type: 'string', required: false, default: 'signature', description: 'Built-in path preset for common use cases', options: ['signature', 'logo', 'house', 'tree', 'circuit', 'handwriting', 'blueprint', 'artistic', 'custom'] },
+      { name: 'duration', type: 'number', required: false, default: 150, description: 'Animation duration in frames' },
+      { name: 'delay', type: 'number', required: false, default: 0, description: 'Delay before animation starts in frames' },
+      { name: 'animationType', type: 'string', required: false, default: 'sequential', description: 'How multiple paths are animated', options: ['sequential', 'staggered', 'simultaneous'] },
+      { name: 'strokeColor', type: 'string', required: false, default: '#00FF88', description: 'Color of the drawn lines' },
+      { name: 'strokeWidth', type: 'number', required: false, default: 3, description: 'Width of the drawn lines' },
+      { name: 'strokeLinecap', type: 'string', required: false, default: 'round', description: 'Line cap style', options: ['round', 'square', 'butt'] },
+      { name: 'strokeLinejoin', type: 'string', required: false, default: 'round', description: 'Line join style', options: ['round', 'bevel', 'miter'] },
+      { name: 'fillColor', type: 'string', required: false, default: 'transparent', description: 'Fill color for closed paths' },
+      { name: 'splitMultiSegments', type: 'boolean', required: false, default: true, description: 'Split complex paths for consistent drawing speed' },
+      { name: 'reverseDirection', type: 'boolean', required: false, default: false, description: 'Draw paths in reverse (erase effect)' },
+      { name: 'showOriginal', type: 'boolean', required: false, default: false, description: 'Briefly show complete path before drawing' },
+      { name: 'glowEffect', type: 'boolean', required: false, default: false, description: 'Add glowing effect to drawn lines' },
+      { name: 'trailEffect', type: 'boolean', required: false, default: false, description: 'Add animated dash trail effect' },
+      { name: 'colorGradient', type: 'object', required: false, description: 'Gradient colors for lines { start: string, end: string }' },
+      { name: 'width', type: 'number', required: false, default: 600, description: 'SVG container width in pixels' },
+      { name: 'height', type: 'number', required: false, default: 400, description: 'SVG container height in pixels' },
+      { name: 'viewBox', type: 'string', required: false, description: 'Custom SVG viewBox (auto-calculated if not provided)' },
+      { name: 'ease', type: 'string', required: false, default: 'power2.out', description: 'GSAP easing function for drawing animation' },
+      { name: 'staggerDelay', type: 'number', required: false, default: 0.1, description: 'Delay between staggered path animations in seconds' },
+      { name: 'backgroundColor', type: 'string', required: false, default: 'transparent', description: 'Background color of the container' }
+    ],
+    examples: [
+      {
+        description: 'Elegant signature with glow effect',
+        props: { 
+          pathPreset: 'signature', 
+          duration: 180, 
+          glowEffect: true, 
+          strokeColor: '#00FF88',
+          backgroundColor: '#000011'
+        }
+      },
+      {
+        description: 'Architectural house blueprint with staggered animation',
+        props: { 
+          pathPreset: 'house', 
+          duration: 240, 
+          animationType: 'staggered', 
+          strokeColor: '#00AAFF',
+          staggerDelay: 0.3,
+          backgroundColor: '#001122'
+        }
+      },
+      {
+        description: 'Growing tree with sequential branch drawing',
+        props: { 
+          pathPreset: 'tree', 
+          duration: 200, 
+          animationType: 'sequential',
+          strokeColor: '#44AA44',
+          fillColor: 'rgba(68, 170, 68, 0.1)',
+          glowEffect: true
+        }
+      },
+      {
+        description: 'Circuit board pattern with trail effects',
+        props: { 
+          pathPreset: 'circuit', 
+          duration: 220, 
+          animationType: 'staggered',
+          strokeColor: '#00FFFF',
+          trailEffect: true,
+          staggerDelay: 0.2
+        }
+      },
+      {
+        description: 'Custom path with gradient colors and reverse animation',
+        props: { 
+          pathData: 'M100,200 Q200,50 300,200 Q400,350 500,200',
+          duration: 150,
+          reverseDirection: true,
+          colorGradient: { start: '#FF6347', end: '#FFD700' },
+          strokeWidth: 6
+        }
+      },
+      {
+        description: '🛡️ SAFE: Error handling with invalid preset (falls back to signature)',
+        props: { 
+          pathPreset: 'nonexistent-preset',
+          duration: 120,
+          strokeColor: '#FFA500'
+        }
+      }
+    ]
+  },
+
+  HyperspaceText: {
+    name: 'HyperspaceText',
+    description: '🚀 EPIC hyperspace text effect with 3D movement, starfield, and optional GSAP enhancements',
+    category: 'animation',
+    props: [
+      { name: 'texts', type: 'string[]', required: false, description: 'Array of text lines to display in hyperspace (uses defaults if not provided)' },
+      { name: 'customText', type: 'string', required: false, description: 'Single custom text to display instead of multiple lines' },
+      { name: 'backgroundColor', type: 'string', required: false, default: '#000000', description: 'Background color of the hyperspace' },
+      { name: 'speed', type: 'number', required: false, default: 1, description: 'Speed of the hyperspace movement (higher = faster)' },
+      { name: 'textColor', type: 'string', required: false, default: '#ffffff', description: 'Color of the text in hyperspace' },
+      { name: 'maxBlur', type: 'number', required: false, default: 10, description: 'Maximum blur amount for distant text' },
+      { name: 'fontSize', type: 'number', required: false, default: 48, description: 'Base font size for the text' },
+      { name: 'enableGsapEffects', type: 'boolean', required: false, default: true, description: 'Enable GSAP-powered character animations' }
+    ],
+    examples: [
+      {
+        description: 'Epic sci-fi intro with custom text',
+        props: {
+          customText: 'WELCOME TO THE FUTURE',
+          speed: 1.5,
+          textColor: '#00FFFF',
+          backgroundColor: '#000011',
+          fontSize: 64
+        }
+      },
+      {
+        description: 'Fast-moving hyperspace with multiple texts',
+        props: {
+          texts: ['LOADING...', 'ACCESSING DATABASE', 'DECRYPTING FILES', 'COMPLETE'],
+          speed: 2,
+          textColor: '#00FF00',
+          maxBlur: 15
+        }
+      },
+      {
+        description: 'Slower cinematic effect with GSAP disabled',
+        props: {
+          customText: 'A long time ago...',
+          speed: 0.5,
+          textColor: '#FFD700',
+          enableGsapEffects: false,
+          fontSize: 72
+        }
+      },
+      {
+        description: 'Corporate tech presentation style',
+        props: {
+          texts: ['INNOVATION', 'TRANSFORMATION', 'SUCCESS', 'FUTURE'],
+          speed: 1.2,
+          textColor: '#0066FF',
+          backgroundColor: '#001122',
+          fontSize: 56
+        }
+      },
+      {
+        description: 'Gaming/esports style with bright colors',
+        props: {
+          customText: 'GAME ON!',
+          speed: 3,
+          textColor: '#FF00FF',
+          backgroundColor: '#110011',
+          maxBlur: 20,
+          fontSize: 96
+        }
+      }
+    ]
+  },
+
+  GenerativeCanvas: {
+    name: 'GenerativeCanvas',
+    description: '🎨 Advanced mathematical generative art renderer with HTML5 Canvas and optional GSAP enhancements',
+    category: 'animation',
+    props: [
+      { name: 'backgroundColor', type: 'string', required: false, default: 'black', description: 'Background color of the canvas' },
+      { name: 'strokeColor', type: 'string', required: false, default: '#ffffff', description: 'Color of the generated pattern lines' },
+      { name: 'strokeOpacity', type: 'number', required: false, default: 0.39, description: 'Opacity of the stroke lines (0-1)' },
+      { name: 'strokeWidth', type: 'number', required: false, default: 1, description: 'Width of the stroke lines in pixels' },
+      { name: 'animationSpeed', type: 'number', required: false, default: 1, description: 'Speed multiplier for the mathematical animation' },
+      { name: 'iterations', type: 'number', required: false, default: 20000, description: 'Number of points to calculate and render' },
+      { name: 'enableGsapEffects', type: 'boolean', required: false, default: true, description: 'Enable GSAP-powered canvas effects' },
+      { name: 'glowEffect', type: 'boolean', required: false, default: false, description: 'Add glowing effect to the canvas' },
+      { name: 'pulseEffect', type: 'boolean', required: false, default: false, description: 'Add breathing/pulse scaling effect' },
+      { name: 'colorCycle', type: 'boolean', required: false, default: false, description: 'Cycle through rainbow colors over time' }
+    ],
+    examples: [
+      {
+        description: 'Classic monochrome generative art',
+        props: {
+          backgroundColor: 'black',
+          strokeColor: '#ffffff',
+          strokeOpacity: 0.4,
+          animationSpeed: 1,
+          iterations: 20000
+        }
+      },
+      {
+        description: 'Colorful animated pattern with glow',
+        props: {
+          backgroundColor: '#001122',
+          strokeColor: '#00FFFF',
+          strokeOpacity: 0.6,
+          animationSpeed: 1.5,
+          glowEffect: true,
+          colorCycle: true,
+          enableGsapEffects: true
+        }
+      },
+      {
+        description: 'Pulsing organic pattern',
+        props: {
+          backgroundColor: '#110000',
+          strokeColor: '#FF6600',
+          strokeOpacity: 0.5,
+          animationSpeed: 0.8,
+          pulseEffect: true,
+          glowEffect: true,
+          iterations: 30000
+        }
+      },
+      {
+        description: 'High-speed mathematical visualization',
+        props: {
+          backgroundColor: 'black',
+          strokeColor: '#00FF00',
+          strokeOpacity: 0.3,
+          animationSpeed: 3,
+          iterations: 40000,
+          strokeWidth: 0.5,
+          colorCycle: true
+        }
+      },
+      {
+        description: 'Minimal artistic approach',
+        props: {
+          backgroundColor: '#FAFAFA',
+          strokeColor: '#333333',
+          strokeOpacity: 0.8,
+          animationSpeed: 0.5,
+          iterations: 15000,
+          strokeWidth: 2,
+          enableGsapEffects: false
+        }
+      }
+    ]
+  },
+
+
 };
 
 /**
@@ -370,6 +610,9 @@ export const getComponentSafetyStatus = (): Record<string, 'SAFE' | 'NEEDS_UPDAT
     SlideTransition: 'SAFE',        // No external resources
     MotionPath: 'SAFE',             // No external resources
     MorphSVG: 'SAFE',               // No external resources
+    DrawSVG: 'SAFE',                // No external resources, built-in presets only
+    HyperspaceText: 'SAFE',         // No external resources, pure procedural effects
+    GenerativeCanvas: 'SAFE',       // No external resources, pure mathematical canvas art
     MinimalTest: 'SAFE',            // No external resources
     // Add new components here with their safety status
   };

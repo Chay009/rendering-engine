@@ -137,7 +137,7 @@ export const MorphSVG: React.FC<MorphSVGProps> = ({
     pathElement.setAttribute('d', resolvedStartShape);
     
     // Prepare morph configuration
-    const morphConfig: any = {
+    const morphConfig = {
       duration: duration / 30, // Convert frames to seconds
       morphSVG: {
         shape: resolvedEndShape,
@@ -170,6 +170,7 @@ export const MorphSVG: React.FC<MorphSVGProps> = ({
     
     return timeline;
   }, [
+    resolveShapes,
     duration,
     animationType,
     shapeIndex,
@@ -177,10 +178,7 @@ export const MorphSVG: React.FC<MorphSVGProps> = ({
     ease,
     reverse,
     yoyo,
-    repeat,
-    startShape,
-    endShape,
-    preset
+    repeat
   ]);
 
   const ref = useSyncedGsap(createTimeline);

@@ -63,7 +63,7 @@ export const makeRenderQueue = ({
   cachedComposition?: TComposition;
 }) => {
   const jobs = new Map<string, JobState>();
-  let queue: Promise<unknown> = Promise.resolve();
+  // const processQueue: Promise<unknown> = Promise.resolve();
 
   const processRender = async (jobId: string) => {
     console.log(`🚀 Starting processRender for job ${jobId}`);

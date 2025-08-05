@@ -1,0 +1,22 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "timeline": [
+    {
+      "component": "ThreeGltfAnimation", 
+      "startFrame": 0,
+      "durationInFrames": 180,
+      "props": {
+        "backgroundColor": "#001122",
+        "cameraPosition": [3, 2, 3],
+        "cameraTarget": [0, 0, 0],
+        "animationType": "presentation",
+        "rotationSpeed": 1.2,
+        "floatAmplitude": 0.3,
+        "scale": 1.2,
+        "enableGsapEffects": true
+      }
+    }
+  ]
+}
