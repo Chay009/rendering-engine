@@ -1,0 +1,59 @@
+{
+  "name": "Global Audio Mode: ALL - Every Component Syncs",
+  "description": "Test case where ALL components sync with audio using default settings",
+  "testCase": "global_audio_mode_all",
+  "expectedBehavior": "TitleCard, CountdownTimer, and ImageWithZoom all react to audio beats and frequency levels",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "ALL COMPONENTS SYNC",
+          "color": "#FF6347",
+          "fontSize": 64,
+          "animationType": "scale"
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 10,
+          "endNumber": 0,
+          "color": "#00FFFF",
+          "fontSize": 96,
+          "suffix": "!"
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "ALSO SYNCING!",
+          "fallbackColor": "#8A2BE2",
+          "direction": "in",
+          "zoomIntensity": 0.3
+        },
+        "startFrame": 30,
+        "durationInFrames": 270
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.8,
+      "fadeIn": 1,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "all",
+        "defaultReactivity": 1.2,
+        "masterIntensity": 0.9
+      }
+    }
+  }
+}

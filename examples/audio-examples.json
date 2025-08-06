@@ -1,0 +1,183 @@
+{
+  "examples": [
+    {
+      "name": "Background Audio Example",
+      "description": "Simple video with background music",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "Welcome to Audio Integration",
+              "color": "#FFFFFF",
+              "fontSize": 72,
+              "animationType": "fadeIn"
+            },
+            "startFrame": 0,
+            "durationInFrames": 120
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "sample-music.mp3",
+          "volume": 0.8,
+          "fadeIn": 2,
+          "fadeOut": 3,
+          "loop": true
+        }
+      }
+    },
+    {
+      "name": "Audio-Synced Animation",
+      "description": "Components that react to audio beats and frequencies",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "AudioSyncedText",
+            "props": {
+              "text": "FEEL THE BEAT",
+              "audioUrl": "sample-music.mp3",
+              "baseSize": 72,
+              "color": "#FF6347",
+              "syncType": "bass",
+              "reactivity": 1.5,
+              "glowEffect": true
+            },
+            "startFrame": 0,
+            "durationInFrames": 180
+          },
+          {
+            "component": "BeatReactiveShape",
+            "props": {
+              "audioUrl": "sample-music.mp3",
+              "shape": "circle",
+              "baseColor": "#333333",
+              "beatColor": "#00FFFF",
+              "size": 150,
+              "reactivity": 2
+            },
+            "startFrame": 30,
+            "durationInFrames": 150
+          }
+        ]
+      }
+    },
+    {
+      "name": "Music Visualizer",
+      "description": "Full music visualization with multiple frequency bands",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "AudioSyncedText",
+            "props": {
+              "text": "BASS",
+              "audioUrl": "sample-music.mp3",
+              "baseSize": 48,
+              "color": "#FF4444",
+              "syncType": "bass",
+              "reactivity": 2.5
+            },
+            "startFrame": 0,
+            "durationInFrames": 300
+          },
+          {
+            "component": "AudioSyncedText", 
+            "props": {
+              "text": "MIDS",
+              "audioUrl": "sample-music.mp3",
+              "baseSize": 48,
+              "color": "#44FF44",
+              "syncType": "mids",
+              "reactivity": 1.8
+            },
+            "startFrame": 0,
+            "durationInFrames": 300
+          },
+          {
+            "component": "AudioSyncedText",
+            "props": {
+              "text": "HIGHS", 
+              "audioUrl": "sample-music.mp3",
+              "baseSize": 48,
+              "color": "#4444FF",
+              "syncType": "highs",
+              "reactivity": 1.5
+            },
+            "startFrame": 0,
+            "durationInFrames": 300
+          },
+          {
+            "component": "BeatReactiveShape",
+            "props": {
+              "audioUrl": "sample-music.mp3",
+              "shape": "circle",
+              "baseColor": "#2a2a2a",
+              "beatColor": "#FF44FF",
+              "size": 200,
+              "reactivity": 2
+            },
+            "startFrame": 0,
+            "durationInFrames": 300
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "sample-music.mp3",
+          "volume": 0.7,
+          "loop": true
+        }
+      }
+    },
+    {
+      "name": "EDM Style Visualizer",
+      "description": "High-energy electronic music visualization",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "AudioSyncedText",
+            "props": {
+              "text": "DROP THE BASS",
+              "audioUrl": "edm-track.mp3",
+              "baseSize": 96,
+              "color": "#00FFFF",
+              "syncType": "bass",
+              "reactivity": 3,
+              "glowEffect": true
+            },
+            "startFrame": 0,
+            "durationInFrames": 240
+          },
+          {
+            "component": "BeatReactiveShape",
+            "props": {
+              "audioUrl": "edm-track.mp3",
+              "shape": "square",
+              "baseColor": "#1a1a1a",
+              "beatColor": "#FF0080",
+              "size": 180,
+              "reactivity": 2.5
+            },
+            "startFrame": 0,
+            "durationInFrames": 240
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "edm-track.mp3",
+          "volume": 0.9,
+          "fadeIn": 1,
+          "loop": false
+        }
+      }
+    }
+  ]
+}

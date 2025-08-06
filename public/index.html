@@ -170,6 +170,15 @@
             <div>
                 <button class="example-button" onclick="loadExample()">Load Example JSON</button>
                 <button class="example-button" onclick="loadSimpleExample()">Load Simple Example</button>
+                <button class="example-button" onclick="loadAudioExample(0)">🎵 Selective Sync</button>
+                <button class="example-button" onclick="loadAudioExample(1)">🎵 Component Override</button>
+                <button class="example-button" onclick="loadAudioExample(2)">🎵 High Energy</button>
+                <button class="example-button" onclick="loadDebugAudio()">🐛 Debug Audio</button>
+                <button class="example-button" onclick="loadSelectiveTest()">🎯 Selective Sync Test</button>
+                <button class="example-button" onclick="loadMarketingAd(1)">🎪 ALL Synced Ad</button>
+                <button class="example-button" onclick="loadMarketingAd(2)">🎭 NONE Synced Ad</button>
+                <button class="example-button" onclick="loadMarketingAd(3)">🎯 SELECTIVE Ad</button>
+                <button class="example-button" onclick="loadComprehensiveTest()">🚀 Full Test Suite</button>
                 <button class="example-button" onclick="clearJSON()">Clear</button>
             </div>
             
@@ -222,7 +231,7 @@
         // Load example JSON
         function loadExample() {
             const exampleJSON = {
-                "dynamicData": {
+                "request": {
                     "width": 1920,
                     "height": 1080,
                     "fps": 30,
@@ -230,48 +239,989 @@
                         {
                             "component": "TitleCard",
                             "props": {
-                                "text": "Hello AI World",
-                                "animationType": "slideUp",
-                                "color": "#00FF88",
-                                "fontSize": 110
+                                "text": "🎵 AUDIO-REACTIVE TITLE",
+                                "animationType": "scale",
+                                "color": "#00FFFF",
+                                "fontSize": 80,
+                                "audioSync": {
+                                    "override": true,
+                                    "enabled": true,
+                                    "type": "beat",
+                                    "reactivity": 1.5
+                                }
                             },
                             "startFrame": 0,
-                            "durationInFrames": 90
-                        },
-                        {
-                            "component": "GsapTitle",
-                            "props": {
-                                "text": "GSAP POWER",
-                                "animationType": "stagger",
-                                "color": "#FF6B35",
-                                "fontSize": 80
-                            },
-                            "startFrame": 90,
-                            "durationInFrames": 120
+                            "durationInFrames": 180
                         },
                         {
                             "component": "CountdownTimer",
                             "props": {
-                                "startNumber": 5,
-                                "endNumber": 1,
+                                "startNumber": 10,
+                                "endNumber": 0,
                                 "suffix": "!",
-                                "color": "#FFD23F",
-                                "fontSize": 150
+                                "color": "#FF6347",
+                                "fontSize": 120
                             },
-                            "startFrame": 210,
+                            "startFrame": 60,
                             "durationInFrames": 150
+                        },
+                        {
+                            "component": "GsapTitle",
+                            "props": {
+                                "text": "GLOBAL AUDIO SYNC",
+                                "animationType": "stagger",
+                                "color": "#FFD700",
+                                "fontSize": 64
+                            },
+                            "startFrame": 150,
+                            "durationInFrames": 90
                         }
-                    ]
+                    ],
+                    "audioConfig": {
+                        "audioUrl": "start-again.mp3",
+                        "volume": 0.8,
+                        "fadeIn": 1,
+                        "fadeOut": 2,
+                        "loop": true,
+                        "globalSync": {
+                            "enabled": true,
+                            "mode": "selective",
+                            "syncComponents": ["TitleCard", "CountdownTimer"],
+                            "defaultReactivity": 1.2,
+                            "masterIntensity": 0.9
+                        }
+                    }
                 }
             };
             
             document.getElementById('jsonInput').value = JSON.stringify(exampleJSON, null, 2);
         }
 
+        // Load audio examples from the collection
+        function loadAudioExample(index = 0) {
+            const audioExamples = [
+                // Example 1: Selective Component Sync
+                {
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "SYNC WITH BEAT",
+                                    "color": "#00FFFF",
+                                    "fontSize": 72,
+                                    "animationType": "scale"
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "ImageWithZoom",
+                                "props": {
+                                    "fallbackText": "STATIC IMAGE",
+                                    "fallbackColor": "#333333",
+                                    "direction": "in",
+                                    "zoomIntensity": 0.2
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 10,
+                                    "endNumber": 0,
+                                    "color": "#FF6347",
+                                    "fontSize": 96,
+                                    "suffix": "!"
+                                },
+                                "startFrame": 60,
+                                "durationInFrames": 120
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "start-again.mp3",
+                            "volume": 0.8,
+                            "fadeIn": 1,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": true,
+                                "mode": "selective",
+                                "syncComponents": ["TitleCard", "CountdownTimer"],
+                                "defaultReactivity": 1.2,
+                                "masterIntensity": 0.9
+                            }
+                        }
+                    }
+                },
+                // Example 2: Component Override Demo
+                {
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "CUSTOM OVERRIDE",
+                                    "color": "#FF00FF",
+                                    "fontSize": 80,
+                                    "animationType": "slideUp",
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "bass",
+                                        "reactivity": 2.5
+                                    }
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 3,
+                                    "endNumber": 1,
+                                    "color": "#00FFFF",
+                                    "fontSize": 150,
+                                    "suffix": "!",
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "highs",
+                                        "reactivity": 1.8
+                                    }
+                                },
+                                "startFrame": 60,
+                                "durationInFrames": 120
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "start-again.mp3",
+                            "volume": 0.9,
+                            "fadeIn": 0.5,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": true,
+                                "mode": "all",
+                                "defaultReactivity": 1.0,
+                                "masterIntensity": 1.0
+                            }
+                        }
+                    }
+                },
+                // Example 3: High Energy Beat Sync
+                {
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "🔥 MAXIMUM ENERGY 🔥",
+                                    "color": "#FF4500",
+                                    "fontSize": 96,
+                                    "animationType": "scale",
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "beat",
+                                        "reactivity": 2.0,
+                                        "property": "all"
+                                    }
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 10,
+                                    "endNumber": 0,
+                                    "color": "#FFFF00",
+                                    "fontSize": 150,
+                                    "suffix": "!!!",
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "bass",
+                                        "reactivity": 1.8,
+                                        "property": "scale"
+                                    }
+                                },
+                                "startFrame": 60,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "ImageWithZoom",
+                                "props": {
+                                    "fallbackText": "🎵 AUDIO PULSE 🎵",
+                                    "fallbackColor": "#8A2BE2",
+                                    "direction": "out",
+                                    "zoomIntensity": 0.4,
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "overall",
+                                        "reactivity": 1.5,
+                                        "property": "all"
+                                    }
+                                },
+                                "startFrame": 30,
+                                "durationInFrames": 210
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "start-again.mp3",
+                            "volume": 1.0,
+                            "fadeIn": 0.5,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": true,
+                                "mode": "all",
+                                "defaultReactivity": 2.0,
+                                "masterIntensity": 1.0
+                            }
+                        }
+                    }
+                }
+            ];
+
+            const selectedExample = audioExamples[index % audioExamples.length];
+            document.getElementById('jsonInput').value = JSON.stringify(selectedExample, null, 2);
+        }
+
+        // Debug audio configuration - minimal test case
+        function loadDebugAudio() {
+            const debugJSON = {
+                "request": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "TitleCard",
+                            "props": {
+                                "text": "🔍 DEBUG AUDIO TEST",
+                                "color": "#00FF00",
+                                "fontSize": 72,
+                                "animationType": "scale"
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 150
+                        }
+                    ],
+                    "audioConfig": {
+                        "audioUrl": "start-again.mp3",
+                        "volume": 0.8,
+                        "loop": true,
+                        "globalSync": {
+                            "enabled": true,
+                            "mode": "all",
+                            "defaultReactivity": 1.5,
+                            "masterIntensity": 1.0
+                        }
+                    }
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(debugJSON, null, 2);
+        }
+
+        // TRUE AUDIO-DRIVEN ANIMATIONS TEST - Shows the difference between synced vs non-synced
+        function loadSelectiveTest() {
+            const selectiveJSON = {
+                "request": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "TitleCard",
+                            "props": {
+                                "text": "✅ AUDIO-DRIVEN ENTRANCE",
+                                "color": "#00FF00", 
+                                "fontSize": 72,
+                                "animationType": "scale"
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 180
+                        },
+                        {
+                            "component": "CountdownTimer",
+                            "props": {
+                                "startNumber": 10,
+                                "endNumber": 0,
+                                "color": "#FFFF00",
+                                "fontSize": 128,
+                                "suffix": "!",
+                                "duration": 150
+                            },
+                            "startFrame": 30,
+                            "durationInFrames": 150
+                        },
+                        {
+                            "component": "ImageWithZoom",
+                            "props": {
+                                "fallbackText": "❌ NORMAL ANIMATION",
+                                "fallbackColor": "#666666",
+                                "direction": "in",
+                                "zoomIntensity": 0.4
+                            },
+                            "startFrame": 60,
+                            "durationInFrames": 180
+                        },
+                        {
+                            "component": "TitleCard",
+                            "props": {
+                                "text": "🎵 BEAT-SYNCHRONIZED",
+                                "color": "#FF6347",
+                                "fontSize": 64,
+                                "animationType": "slideUp"
+                            },
+                            "startFrame": 150,
+                            "durationInFrames": 120
+                        }
+                    ],
+                    "audioConfig": {
+                        "audioUrl": "start-again.mp3",
+                        "volume": 0.9,
+                        "loop": true,
+                        "globalSync": {
+                            "enabled": true,
+                            "mode": "selective",
+                            "syncComponents": ["TitleCard", "CountdownTimer"],
+                            "defaultReactivity": 2.0,
+                            "masterIntensity": 1.0
+                        }
+                    }
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(selectiveJSON, null, 2);
+        }
+
+        // Marketing Ad Test Cases - 3 comprehensive scenarios
+        function loadMarketingAd(type) {
+            const marketingAds = {
+                1: {
+                    // 🎪 ALL COMPONENTS SYNCED - "HYPER GAMING CHAMPIONSHIP"
+                    "name": "HYPER GAMING CHAMPIONSHIP - ALL SYNCED",
+                    "description": "EXTREME gaming tournament with MAXIMUM audio sync - every component pulses with beats",
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "⚡ HYPER GAMING CHAMPIONSHIP ⚡",
+                                    "color": "#FF0080",
+                                    "fontSize": 128,
+                                    "animationType": "scale"
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 10,
+                                    "endNumber": 0,
+                                    "color": "#00FFFF",
+                                    "fontSize": 200,
+                                    "prefix": "BATTLE STARTS: ",
+                                    "suffix": "!",
+                                    "duration": 150
+                                },
+                                "startFrame": 60,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "ImageWithZoom",
+                                "props": {
+                                    "fallbackText": "🎮 ULTIMATE SHOWDOWN",
+                                    "fallbackColor": "#000000",
+                                    "direction": "in",
+                                    "zoomIntensity": 0.8,
+                                    "fit": "cover"
+                                },
+                                "startFrame": 90,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "MotionPath",
+                                "props": {
+                                    "elementText": "👑",
+                                    "elementShape": "text",
+                                    "elementColor": "#FFD700",
+                                    "elementSize": 80,
+                                    "pathType": "circle",
+                                    "radius": 300,
+                                    "duration": 180,
+                                    "autoRotate": true,
+                                    "ease": "power2.inOut",
+                                    "motionBlur": true
+                                },
+                                "startFrame": 120,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "GsapTitle",
+                                "props": {
+                                    "text": "LEGENDARY WARRIORS ASSEMBLE",
+                                    "color": "#FF4500",
+                                    "fontSize": 88,
+                                    "animationType": "bounce"
+                                },
+                                "startFrame": 180,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "DrawSVG",
+                                "props": {
+                                    "pathPreset": "circuit",
+                                    "duration": 120,
+                                    "strokeColor": "#00FF88",
+                                    "strokeWidth": 4,
+                                    "animationType": "staggered",
+                                    "glowEffect": true,
+                                    "trailEffect": true,
+                                    "staggerDelay": 0.1,
+                                    "backgroundColor": "#001122"
+                                },
+                                "startFrame": 240,
+                                "durationInFrames": 120
+                            },
+                            {
+                                "component": "HyperspaceText",
+                                "props": {
+                                    "customText": "PREPARE FOR DIGITAL WARFARE",
+                                    "speed": 3.0,
+                                    "textColor": "#FF0000",
+                                    "backgroundColor": "#000000",
+                                    "fontSize": 64,
+                                    "maxBlur": 20,
+                                    "enableGsapEffects": true
+                                },
+                                "startFrame": 300,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "GenerativeCanvas",
+                                "props": {
+                                    "backgroundColor": "#110011",
+                                    "strokeColor": "#FF00FF",
+                                    "strokeOpacity": 0.8,
+                                    "strokeWidth": 3,
+                                    "animationSpeed": 2.5,
+                                    "iterations": 35000,
+                                    "enableGsapEffects": true,
+                                    "glowEffect": true,
+                                    "pulseEffect": true,
+                                    "colorCycle": true
+                                },
+                                "startFrame": 360,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "🏆 CLAIM YOUR DESTINY 🏆",
+                                    "color": "#FFFF00",
+                                    "fontSize": 112,
+                                    "animationType": "slideUp"
+                                },
+                                "startFrame": 540,
+                                "durationInFrames": 120
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "start-again.mp3",
+                            "volume": 1.0,
+                            "fadeIn": 0.5,
+                            "fadeOut": 2,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": true,
+                                "mode": "all",
+                                "defaultReactivity": 3.0,
+                                "masterIntensity": 1.0
+                            }
+                        }
+                    }
+                },
+                2: {
+                    // 🎭 NO COMPONENTS SYNCED - "ROYAL DIAMOND COLLECTION"
+                    "name": "ROYAL DIAMOND COLLECTION - NONE SYNCED",
+                    "description": "Ultra-luxury jewelry with NO audio sync - pure elegant timing animations",
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "💎 ROYAL DIAMOND COLLECTION 💎",
+                                    "color": "#E6E6FA",
+                                    "fontSize": 96,
+                                    "animationType": "fadeIn"
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "ImageWithZoom",
+                                "props": {
+                                    "fallbackText": "✨ ETERNAL BRILLIANCE ✨",
+                                    "fallbackColor": "#1C1C1C",
+                                    "direction": "out",
+                                    "zoomIntensity": 0.4,
+                                    "fit": "contain"
+                                },
+                                "startFrame": 90,
+                                "durationInFrames": 300
+                            },
+                            {
+                                "component": "MorphSVG",
+                                "props": {
+                                    "preset": "circle-to-star",
+                                    "duration": 180,
+                                    "fillColor": "#FFD700",
+                                    "strokeColor": "#B8860B",
+                                    "strokeWidth": 3,
+                                    "width": 400,
+                                    "height": 400,
+                                    "yoyo": true,
+                                    "repeat": 3,
+                                    "ease": "power2.inOut"
+                                },
+                                "startFrame": 150,
+                                "durationInFrames": 360
+                            },
+                            {
+                                "component": "GsapTitle",
+                                "props": {
+                                    "text": "HANDCRAFTED PERFECTION",
+                                    "color": "#DAA520",
+                                    "fontSize": 72,
+                                    "animationType": "stagger"
+                                },
+                                "startFrame": 240,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "DrawSVG",
+                                "props": {
+                                    "pathPreset": "signature",
+                                    "duration": 150,
+                                    "strokeColor": "#C9B037",
+                                    "strokeWidth": 5,
+                                    "glowEffect": true,
+                                    "backgroundColor": "#000000",
+                                    "ease": "power2.out"
+                                },
+                                "startFrame": 330,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 24,
+                                    "endNumber": 1,
+                                    "color": "#F0E68C",
+                                    "fontSize": 88,
+                                    "prefix": "Exclusive: ",
+                                    "suffix": " karat gold",
+                                    "duration": 240
+                                },
+                                "startFrame": 420,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "Legacy of Excellence",
+                                    "color": "#DDA0DD",
+                                    "fontSize": 64,
+                                    "animationType": "scale"
+                                },
+                                "startFrame": 540,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "MotionPath",
+                                "props": {
+                                    "elementText": "👑",
+                                    "elementShape": "text",
+                                    "elementColor": "#FFD700",
+                                    "elementSize": 60,
+                                    "pathType": "spiral",
+                                    "radius": 200,
+                                    "duration": 300,
+                                    "autoRotate": false,
+                                    "ease": "power1.inOut"
+                                },
+                                "startFrame": 600,
+                                "durationInFrames": 300
+                            },
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "Own Eternity",
+                                    "color": "#B8860B",
+                                    "fontSize": 108,
+                                    "animationType": "slideUp"
+                                },
+                                "startFrame": 810,
+                                "durationInFrames": 120
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "background-music-advertising.mp3",
+                            "volume": 0.5,
+                            "fadeIn": 3,
+                            "fadeOut": 4,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": false
+                            }
+                        }
+                    }
+                },
+                3: {
+                    // 🎯 SELECTIVE SYNC - "EXTREME SPORTS CHAMPIONSHIP"
+                    "name": "EXTREME SPORTS CHAMPIONSHIP - SELECTIVE SYNC",
+                    "description": "Extreme sports event with strategic selective audio sync - only key elements sync",
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "🔥 EXTREME SPORTS WORLD CHAMPIONSHIP 🔥",
+                                    "color": "#FF4500",
+                                    "fontSize": 116,
+                                    "animationType": "scale"
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "ImageWithZoom",
+                                "props": {
+                                    "fallbackText": "🏂 NO LIMITS",
+                                    "fallbackColor": "#2F4F4F",
+                                    "direction": "in",
+                                    "zoomIntensity": 0.7,
+                                    "fit": "cover"
+                                },
+                                "startFrame": 60,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 15,
+                                    "endNumber": 0,
+                                    "color": "#00FFFF",
+                                    "fontSize": 180,
+                                    "prefix": "ADRENALINE RUSH IN: ",
+                                    "suffix": " SECONDS!",
+                                    "duration": 180
+                                },
+                                "startFrame": 120,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "MotionPath",
+                                "props": {
+                                    "elementText": "🏄‍♂️",
+                                    "elementShape": "text",
+                                    "elementColor": "#1E90FF",
+                                    "elementSize": 90,
+                                    "pathType": "curve",
+                                    "width": 900,
+                                    "height": 500,
+                                    "duration": 240,
+                                    "autoRotate": true,
+                                    "ease": "power3.inOut",
+                                    "motionBlur": true
+                                },
+                                "startFrame": 180,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "GsapTitle",
+                                "props": {
+                                    "text": "DEFY GRAVITY. EMBRACE CHAOS.",
+                                    "color": "#DC143C",
+                                    "fontSize": 82,
+                                    "animationType": "bounce"
+                                },
+                                "startFrame": 240,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "DrawSVG",
+                                "props": {
+                                    "pathPreset": "artistic",
+                                    "duration": 180,
+                                    "strokeColor": "#FF1493",
+                                    "strokeWidth": 5,
+                                    "animationType": "simultaneous",
+                                    "glowEffect": true,
+                                    "trailEffect": true,
+                                    "backgroundColor": "#000000"
+                                },
+                                "startFrame": 300,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "HyperspaceText",
+                                "props": {
+                                    "customText": "PUSH YOUR LIMITS TO THE EDGE",
+                                    "speed": 2.8,
+                                    "textColor": "#FFD700",
+                                    "backgroundColor": "#000033",
+                                    "fontSize": 68,
+                                    "maxBlur": 25,
+                                    "enableGsapEffects": true
+                                },
+                                "startFrame": 360,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "MorphSVG",
+                                "props": {
+                                    "preset": "triangle-to-diamond",
+                                    "duration": 120,
+                                    "fillColor": "#FF6347",
+                                    "strokeColor": "#B22222",
+                                    "strokeWidth": 4,
+                                    "width": 350,
+                                    "height": 350,
+                                    "yoyo": false,
+                                    "repeat": 0,
+                                    "ease": "back.out(1.7)"
+                                },
+                                "startFrame": 480,
+                                "durationInFrames": 120
+                            },
+                            {
+                                "component": "GenerativeCanvas",
+                                "props": {
+                                    "backgroundColor": "#1a0a0a",
+                                    "strokeColor": "#FF4500",
+                                    "strokeOpacity": 0.7,
+                                    "strokeWidth": 2,
+                                    "animationSpeed": 1.8,
+                                    "iterations": 28000,
+                                    "enableGsapEffects": false,
+                                    "glowEffect": false,
+                                    "pulseEffect": false,
+                                    "colorCycle": false
+                                },
+                                "startFrame": 540,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "🏆 BE THE LEGEND 🏆",
+                                    "color": "#FFFF00",
+                                    "fontSize": 124,
+                                    "animationType": "slideUp"
+                                },
+                                "startFrame": 660,
+                                "durationInFrames": 120
+                            },
+                            {
+                                "component": "SlideTransition",
+                                "props": {
+                                    "backgroundColor": "#8B0000",
+                                    "direction": "left"
+                                },
+                                "startFrame": 750,
+                                "durationInFrames": 30
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "advertising-background-music.mp3",
+                            "volume": 1.0,
+                            "fadeIn": 0.8,
+                            "fadeOut": 2.5,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": true,
+                                "mode": "selective",
+                                "syncComponents": ["TitleCard", "CountdownTimer", "HyperspaceText"],
+                                "excludeComponents": ["GsapTitle", "ImageWithZoom", "SlideTransition", "MotionPath", "DrawSVG", "MorphSVG", "GenerativeCanvas"],
+                                "defaultReactivity": 3.0,
+                                "masterIntensity": 1.0
+                            }
+                        }
+                    }
+                }
+            };
+
+            const selectedAd = marketingAds[type];
+            document.getElementById('jsonInput').value = JSON.stringify(selectedAd, null, 2);
+        }
+
+        // Load comprehensive test suite
+        async function loadComprehensiveTest() {
+            try {
+                const response = await fetch('/examples/comprehensive-test.json');
+                const data = await response.json();
+                
+                // Extract the request object from the comprehensive test
+                document.getElementById('jsonInput').value = JSON.stringify(data, null, 2);
+            } catch (error) {
+                // Fallback inline version if file fetch fails
+                const comprehensiveTest = {
+                    "request": {
+                        "width": 1920,
+                        "height": 1080,
+                        "fps": 30,
+                        "timeline": [
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "🎵 COMPREHENSIVE TEST SUITE",
+                                    "color": "#FF6347",
+                                    "fontSize": 96,
+                                    "animationType": "scale",
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "beat",
+                                        "reactivity": 2.0,
+                                        "property": "all"
+                                    }
+                                },
+                                "startFrame": 0,
+                                "durationInFrames": 120
+                            },
+                            {
+                                "component": "CountdownTimer",
+                                "props": {
+                                    "startNumber": 10,
+                                    "endNumber": 0,
+                                    "color": "#00FFFF",
+                                    "fontSize": 128,
+                                    "prefix": "T-",
+                                    "suffix": "!",
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "bass",
+                                        "reactivity": 1.8
+                                    }
+                                },
+                                "startFrame": 60,
+                                "durationInFrames": 150
+                            },
+                            {
+                                "component": "ImageWithZoom",
+                                "props": {
+                                    "fallbackText": "🎨 AUDIO PULSE VISUAL",
+                                    "fallbackColor": "#8A2BE2",
+                                    "direction": "in",
+                                    "zoomIntensity": 0.4,
+                                    "audioSync": {
+                                        "override": true,
+                                        "enabled": true,
+                                        "type": "overall",
+                                        "reactivity": 1.5
+                                    }
+                                },
+                                "startFrame": 30,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "GsapTitle",
+                                "props": {
+                                    "text": "GSAP STAGGER ANIMATION",
+                                    "color": "#FFD700",
+                                    "fontSize": 72,
+                                    "animationType": "stagger"
+                                },
+                                "startFrame": 180,
+                                "durationInFrames": 120
+                            },
+                            {
+                                "component": "HyperspaceText",
+                                "props": {
+                                    "customText": "HYPERSPACE MODE",
+                                    "speed": 1.8,
+                                    "textColor": "#00FF00",
+                                    "backgroundColor": "#000011",
+                                    "fontSize": 64
+                                },
+                                "startFrame": 270,
+                                "durationInFrames": 180
+                            },
+                            {
+                                "component": "GenerativeCanvas",
+                                "props": {
+                                    "backgroundColor": "#110011",
+                                    "strokeColor": "#FF00FF",
+                                    "strokeOpacity": 0.6,
+                                    "animationSpeed": 1.5,
+                                    "glowEffect": true,
+                                    "colorCycle": true
+                                },
+                                "startFrame": 360,
+                                "durationInFrames": 240
+                            },
+                            {
+                                "component": "TitleCard",
+                                "props": {
+                                    "text": "✅ FULL FEATURE TEST",
+                                    "color": "#00FF00",
+                                    "fontSize": 88,
+                                    "animationType": "fadeIn"
+                                },
+                                "startFrame": 540,
+                                "durationInFrames": 120
+                            }
+                        ],
+                        "audioConfig": {
+                            "audioUrl": "start-again.mp3",
+                            "volume": 0.9,
+                            "fadeIn": 1.0,
+                            "fadeOut": 2.0,
+                            "loop": true,
+                            "globalSync": {
+                                "enabled": true,
+                                "mode": "all",
+                                "defaultReactivity": 1.2,
+                                "masterIntensity": 0.9
+                            }
+                        }
+                    }
+                };
+                
+                document.getElementById('jsonInput').value = JSON.stringify(comprehensiveTest, null, 2);
+                console.log('Loaded fallback comprehensive test');
+            }
+        }
+
         // Load simple example
         function loadSimpleExample() {
             const simpleJSON = {
-                "dynamicData": {
+                "request": {
                     "width": 1920,
                     "height": 1080,
                     "fps": 30,
@@ -280,7 +1230,9 @@
                             "component": "TitleCard",
                             "props": {
                                 "text": "Simple Video Test",
-                                "animationType": "fadeIn"
+                                "animationType": "fadeIn",
+                                "color": "#FFFFFF",
+                                "fontSize": 64
                             },
                             "startFrame": 0,
                             "durationInFrames": 120
@@ -302,11 +1254,79 @@
             const jsonText = document.getElementById('jsonInput').value;
             try {
                 const parsed = JSON.parse(jsonText);
-                if (parsed.dynamicData && parsed.dynamicData.timeline) {
-                    showStatus('success', 'JSON is valid! ✅');
-                } else {
-                    showStatus('error', 'JSON is valid but missing required structure (dynamicData.timeline)');
+                
+                // Check for new direct structure (recommended)
+                if (parsed.request && parsed.request.timeline) {
+                    let messages = ['JSON is valid! ✅'];
+                    
+                    // Validate audio configuration if present
+                    if (parsed.request.audioConfig) {
+                        const audioConfig = parsed.request.audioConfig;
+                        
+                        // Check for external URLs (potential CORS issues)
+                        if (audioConfig.audioUrl && audioConfig.audioUrl.startsWith('http')) {
+                            messages.push('⚠️ Warning: External audio URLs may cause CORS issues. Use local files in public/ folder for best results.');
+                        }
+                        
+                        // Validate global sync configuration
+                        if (audioConfig.globalSync) {
+                            const globalSync = audioConfig.globalSync;
+                            
+                            if (globalSync.enabled) {
+                                if (globalSync.mode === 'selective' && !globalSync.syncComponents) {
+                                    messages.push('⚠️ Warning: Selective mode requires syncComponents array.');
+                                }
+                                
+                                if (globalSync.mode === 'all' && globalSync.excludeComponents) {
+                                    messages.push('ℹ️ Info: Using "all" mode with exclusions - components in excludeComponents will not sync.');
+                                }
+                                
+                                messages.push(`🎵 Audio Sync: ${globalSync.mode} mode enabled with ${globalSync.defaultReactivity || 1.0}x reactivity`);
+                            } else {
+                                messages.push('🔇 Audio Sync: Disabled - audio will play as background only');
+                            }
+                        } else {
+                            messages.push('🎵 Audio: Background audio only (no sync configuration)');
+                        }
+                    }
+                    
+                    // Check for component-level audio overrides
+                    const componentsWithAudioSync = parsed.request.timeline.filter(item => 
+                        item.props && item.props.audioSync
+                    );
+                    
+                    if (componentsWithAudioSync.length > 0) {
+                        messages.push(`🎛️ Custom Audio: ${componentsWithAudioSync.length} components have custom audio sync settings`);
+                    }
+                    
+                    // Check for deprecated individual audioUrl props
+                    const componentsWithOldAudioUrl = parsed.request.timeline.filter(item => 
+                        item.props && item.props.audioUrl
+                    );
+                    
+                    if (componentsWithOldAudioUrl.length > 0) {
+                        messages.push(`⚠️ Deprecated: ${componentsWithOldAudioUrl.length} components use individual audioUrl props. Use global audioConfig instead for better performance.`);
+                    }
+                    
+                    showStatus('success', messages.join('<br>'));
+                    return;
                 }
+                
+                // Check for old dynamicData structure (still supported)
+                if (parsed.dynamicData && parsed.dynamicData.timeline) {
+                    showStatus('success', 'JSON is valid! ✅<br>ℹ️ Note: Using legacy dynamicData structure. Consider using direct "request" structure for new features.');
+                    return;
+                }
+                
+                // Check for direct timeline (fallback)
+                if (parsed.timeline) {
+                    showStatus('success', 'JSON is valid! ✅<br>ℹ️ Note: Using direct timeline structure.');
+                    return;
+                }
+                
+                // Invalid structure
+                showStatus('error', 'JSON is valid but missing required structure.<br><br>Expected formats:<br>• { "request": { "timeline": [...], "audioConfig": {...} } } (recommended)<br>• { "dynamicData": { "timeline": [...] } } (legacy)<br>• { "timeline": [...] } (basic)');
+                
             } catch (error) {
                 showStatus('error', `Invalid JSON: ${error.message}`);
             }

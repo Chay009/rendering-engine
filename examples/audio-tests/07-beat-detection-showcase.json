@@ -1,0 +1,77 @@
+{
+  "name": "Beat Detection Showcase - All Components React to Beats",
+  "description": "Test case highlighting beat detection with all components set to react to detected beats",
+  "testCase": "beat_detection_showcase",
+  "expectedBehavior": "All components pulse, scale, and glow in sync with detected beats. Should see coordinated reactions on drum hits and percussion.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "🥁 BEAT DETECTION 🥁",
+          "color": "#FFD700",
+          "fontSize": 80,
+          "animationType": "scale",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "beat",
+            "reactivity": 2.0
+          }
+        },
+        "startFrame": 0,
+        "durationInFrames": 360
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 12,
+          "endNumber": 0,
+          "color": "#FF69B4",
+          "fontSize": 130,
+          "suffix": " BEATS",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "beat",
+            "reactivity": 1.7
+          }
+        },
+        "startFrame": 90,
+        "durationInFrames": 270
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "🎵 PULSE 🎵",
+          "fallbackColor": "#8A2BE2",
+          "direction": "out",
+          "zoomIntensity": 0.5,
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "beat",
+            "reactivity": 1.5
+          }
+        },
+        "startFrame": 45,
+        "durationInFrames": 315
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 1.0,
+      "fadeIn": 0.5,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "all",
+        "defaultReactivity": 1.5,
+        "masterIntensity": 1.0
+      }
+    }
+  }
+}

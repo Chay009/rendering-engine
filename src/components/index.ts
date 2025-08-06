@@ -1,5 +1,6 @@
 // Component Library Registry - PRODUCTION OPTIMIZED
 // 🚀 Now with PRE-WARMED BROWSER + CACHED COMPOSITION = ULTRA FAST!
+// 🎵 NEW: Audio Integration - Type 1 (Background) + Type 2 (Synced)
 
 export { TitleCard } from './TitleCard';
 export { ImageWithZoom } from './ImageWithZoom';
@@ -13,7 +14,10 @@ export { HyperspaceText } from './HyperspaceText';
 export { GenerativeCanvas } from './GenerativeCanvas';
 export { MinimalTest } from './MinimalTest'; // Keep for testing
 
-// Component Registry for dynamic lookup - FULL PRODUCTION SET
+// Audio Components - Type 1: Background Audio + Type 2: Audio-Synced
+export { AudioPlayer, BeatReactiveShape, AudioSyncedText } from './audio';
+
+// Component Registry for dynamic lookup - FULL PRODUCTION SET + AUDIO
 export const COMPONENT_REGISTRY = {
   TitleCard: 'TitleCard',           // ✅ FAST - Basic text rendering
   ImageWithZoom: 'ImageWithZoom',   // ✅ FAST - Basic CSS animations  
@@ -26,6 +30,11 @@ export const COMPONENT_REGISTRY = {
   HyperspaceText: 'HyperspaceText', // ✅ NEW - 3D hyperspace text effect with GSAP
   GenerativeCanvas: 'GenerativeCanvas', // ✅ NEW - Mathematical generative art with GSAP
   MinimalTest: 'MinimalTest',       // ✅ FASTEST - For performance testing
+  
+  // Audio Components - NEW AUDIO INTEGRATION
+  AudioPlayer: 'AudioPlayer',       // 🎵 Type 1 - Background audio with fade effects
+  BeatReactiveShape: 'BeatReactiveShape', // 🎵 Type 2 - Shape reacts to audio beats
+  AudioSyncedText: 'AudioSyncedText', // 🎵 Type 2 - Text synced to audio frequencies
 } as const;
 
 export type ComponentName = keyof typeof COMPONENT_REGISTRY;

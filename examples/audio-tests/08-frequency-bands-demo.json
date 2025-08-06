@@ -1,0 +1,78 @@
+{
+  "name": "Frequency Bands Demo - Different Components Different Frequencies",
+  "description": "Test case showing each component reacting to different frequency bands for sophisticated audio visualization",
+  "testCase": "frequency_bands_demo",
+  "expectedBehavior": "TitleCard reacts to bass (low freq), CountdownTimer to mids (vocals/melody), ImageWithZoom to highs (treble). Each should react differently to music elements.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "🎸 BASS FREQUENCIES 🎸",
+          "color": "#8B0000",
+          "fontSize": 64,
+          "animationType": "fadeIn",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "bass",
+            "reactivity": 2.2
+          }
+        },
+        "startFrame": 0,
+        "durationInFrames": 330
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 8,
+          "endNumber": 0,
+          "color": "#006400",
+          "fontSize": 85,
+          "prefix": "🎤 MID ",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "mids",
+            "reactivity": 1.6
+          }
+        },
+        "startFrame": 75,
+        "durationInFrames": 255
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "🎶 TREBLE HIGHS 🎶",
+          "fallbackColor": "#191970",
+          "direction": "in",
+          "zoomIntensity": 0.35,
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "highs",
+            "reactivity": 1.9
+          }
+        },
+        "startFrame": 45,
+        "durationInFrames": 285
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.85,
+      "fadeIn": 1,
+      "fadeOut": 1.5,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "all",
+        "defaultReactivity": 1.0,
+        "masterIntensity": 0.9
+      }
+    }
+  }
+}

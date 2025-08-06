@@ -63,6 +63,21 @@ function setupApp({
       return;
     }
     
+    // 🐛 DEBUG: Check for new request structure with audioConfig
+    if (req.body && req.body.request) {
+      console.log('✅ Found request structure, extracting data');
+      const requestData = req.body.request;
+      
+      // Debug log the audio config
+      if (requestData.audioConfig) {
+        console.log('🎵 Audio config found:', JSON.stringify(requestData.audioConfig, null, 2));
+      }
+      
+      const jobId = queue.createDynamicJob(requestData);
+      res.json({ jobId });
+      return;
+    }
+    
     // 🐛 DEBUG: Check if request body itself is the dynamic data
     if (req.body && req.body.timeline) {
       console.log('✅ Found timeline in request body, treating as dynamic data');

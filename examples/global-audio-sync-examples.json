@@ -1,0 +1,346 @@
+{
+  "name": "Global Audio Sync Examples Collection",
+  "description": "Comprehensive examples demonstrating the new global audio orchestration system",
+  "examples": [
+    {
+      "name": "Selective Component Sync",
+      "description": "Only TitleCard and CountdownTimer sync with audio, ImageWithZoom stays static",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "SYNC WITH BEAT",
+              "color": "#00FFFF",
+              "fontSize": 72,
+              "animationType": "scale"
+            },
+            "startFrame": 0,
+            "durationInFrames": 180
+          },
+          {
+            "component": "ImageWithZoom",
+            "props": {
+              "imageUrl": "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80",
+              "direction": "in",
+              "zoomIntensity": 0.2
+            },
+            "startFrame": 0,
+            "durationInFrames": 180
+          },
+          {
+            "component": "CountdownTimer",
+            "props": {
+              "startNumber": 10,
+              "endNumber": 0,
+              "color": "#FF6347",
+              "fontSize": 96,
+              "suffix": "!"
+            },
+            "startFrame": 60,
+            "durationInFrames": 120
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "start-again.mp3",
+          "volume": 0.8,
+          "fadeIn": 1,
+          "loop": true,
+          "globalSync": {
+            "enabled": true,
+            "mode": "selective",
+            "syncComponents": ["TitleCard", "CountdownTimer"],
+            "defaultReactivity": 1.2,
+            "masterIntensity": 0.9
+          }
+        }
+      }
+    },
+    {
+      "name": "All Components Sync with Exclusions",
+      "description": "All components sync except ImageWithZoom which is excluded",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "EVERYTHING SYNCS",
+              "color": "#FFD700",
+              "fontSize": 64,
+              "animationType": "fadeIn"
+            },
+            "startFrame": 0,
+            "durationInFrames": 150
+          },
+          {
+            "component": "ImageWithZoom",
+            "props": {
+              "fallbackText": "STATIC IMAGE",
+              "fallbackColor": "#333333",
+              "direction": "out"
+            },
+            "startFrame": 30,
+            "durationInFrames": 120
+          },
+          {
+            "component": "CountdownTimer",
+            "props": {
+              "startNumber": 5,
+              "endNumber": 1,
+              "color": "#00FF00",
+              "fontSize": 128,
+              "prefix": "T-"
+            },
+            "startFrame": 90,
+            "durationInFrames": 90
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "start-again.mp3",
+          "volume": 0.7,
+          "fadeIn": 2,
+          "loop": true,
+          "globalSync": {
+            "enabled": true,
+            "mode": "all",
+            "excludeComponents": ["ImageWithZoom"],
+            "defaultReactivity": 1.0,
+            "masterIntensity": 0.8
+          }
+        }
+      }
+    },
+    {
+      "name": "Component Override Demo",
+      "description": "Global sync enabled but individual components override with custom settings",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "CUSTOM OVERRIDE",
+              "color": "#FF00FF",
+              "fontSize": 80,
+              "animationType": "slideUp",
+              "audioSync": {
+                "override": true,
+                "enabled": true,
+                "type": "bass",
+                "reactivity": 2.5
+              }
+            },
+            "startFrame": 0,
+            "durationInFrames": 180
+          },
+          {
+            "component": "CountdownTimer",
+            "props": {
+              "startNumber": 3,
+              "endNumber": 1,
+              "color": "#00FFFF",
+              "fontSize": 150,
+              "suffix": "!",
+              "audioSync": {
+                "override": true,
+                "enabled": true,
+                "type": "highs",
+                "reactivity": 1.8
+              }
+            },
+            "startFrame": 60,
+            "durationInFrames": 120
+          },
+          {
+            "component": "ImageWithZoom",
+            "props": {
+              "fallbackText": "DEFAULT SYNC",
+              "fallbackColor": "#FF6347",
+              "direction": "in",
+              "zoomIntensity": 0.3
+            },
+            "startFrame": 30,
+            "durationInFrames": 150
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "start-again.mp3",
+          "volume": 0.9,
+          "fadeIn": 0.5,
+          "loop": true,
+          "globalSync": {
+            "enabled": true,
+            "mode": "all",
+            "defaultReactivity": 1.0,
+            "masterIntensity": 1.0
+          }
+        }
+      }
+    },
+    {
+      "name": "Manual Mode - Explicit Opt-in Only",
+      "description": "Only components with explicit audioSync props will sync",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "NO SYNC",
+              "color": "#FFFFFF",
+              "fontSize": 64
+            },
+            "startFrame": 0,
+            "durationInFrames": 120
+          },
+          {
+            "component": "CountdownTimer",
+            "props": {
+              "startNumber": 5,
+              "endNumber": 0,
+              "color": "#00FF00",
+              "fontSize": 100,
+              "audioSync": {
+                "override": true,
+                "enabled": true,
+                "type": "beat",
+                "reactivity": 1.5
+              }
+            },
+            "startFrame": 30,
+            "durationInFrames": 90
+          },
+          {
+            "component": "ImageWithZoom",
+            "props": {
+              "fallbackText": "ALSO NO SYNC",
+              "fallbackColor": "#666666",
+              "direction": "in"
+            },
+            "startFrame": 60,
+            "durationInFrames": 90
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "start-again.mp3",
+          "volume": 0.8,
+          "loop": true,
+          "globalSync": {
+            "enabled": true,
+            "mode": "manual",
+            "defaultReactivity": 1.0,
+            "masterIntensity": 0.7
+          }
+        }
+      }
+    },
+    {
+      "name": "High Energy Beat Sync",
+      "description": "All components with maximum reactivity for intense audio-visual sync",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "🔥 MAXIMUM ENERGY 🔥",
+              "color": "#FF4500",
+              "fontSize": 96,
+              "animationType": "scale"
+            },
+            "startFrame": 0,
+            "durationInFrames": 240
+          },
+          {
+            "component": "CountdownTimer",
+            "props": {
+              "startNumber": 10,
+              "endNumber": 0,
+              "color": "#FFFF00",
+              "fontSize": 150,
+              "suffix": "!!!"
+            },
+            "startFrame": 60,
+            "durationInFrames": 180
+          },
+          {
+            "component": "ImageWithZoom",
+            "props": {
+              "fallbackText": "🎵 PULSE 🎵",
+              "fallbackColor": "#8A2BE2",
+              "direction": "out",
+              "zoomIntensity": 0.4
+            },
+            "startFrame": 30,
+            "durationInFrames": 210
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "start-again.mp3",
+          "volume": 1.0,
+          "fadeIn": 0.5,
+          "loop": true,
+          "globalSync": {
+            "enabled": true,
+            "mode": "all",
+            "defaultReactivity": 2.0,
+            "masterIntensity": 1.0
+          }
+        }
+      }
+    },
+    {
+      "name": "Audio Disabled - Static Animation Only",
+      "description": "Demonstrates that components work normally when audio sync is disabled",
+      "request": {
+        "width": 1920,
+        "height": 1080,
+        "fps": 30,
+        "timeline": [
+          {
+            "component": "TitleCard",
+            "props": {
+              "text": "STATIC ANIMATION",
+              "color": "#CCCCCC",
+              "fontSize": 72,
+              "animationType": "fadeIn"
+            },
+            "startFrame": 0,
+            "durationInFrames": 150
+          },
+          {
+            "component": "CountdownTimer",
+            "props": {
+              "startNumber": 3,
+              "endNumber": 1,
+              "color": "#AAAAAA",
+              "fontSize": 120
+            },
+            "startFrame": 60,
+            "durationInFrames": 90
+          }
+        ],
+        "audioConfig": {
+          "audioUrl": "start-again.mp3",
+          "volume": 0.5,
+          "loop": true,
+          "globalSync": {
+            "enabled": false
+          }
+        }
+      }
+    }
+  ]
+}

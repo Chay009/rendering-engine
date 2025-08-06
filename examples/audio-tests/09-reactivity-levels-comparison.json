@@ -1,0 +1,78 @@
+{
+  "name": "Reactivity Levels Comparison - Low, Medium, High",
+  "description": "Test case demonstrating different reactivity levels (0.5, 1.0, 2.0) to show intensity scaling",
+  "testCase": "reactivity_levels_comparison", 
+  "expectedBehavior": "Three components with same sync type but different reactivity. Should see subtle (0.5), normal (1.0), and intense (2.0) reactions to same audio.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "LOW REACTIVITY (0.5)",
+          "color": "#90EE90",
+          "fontSize": 48,
+          "animationType": "slideUp",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "overall",
+            "reactivity": 0.5
+          }
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 1,
+          "color": "#FFB347",
+          "fontSize": 70,
+          "prefix": "MED ",
+          "suffix": " (1.0)",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "overall", 
+            "reactivity": 1.0
+          }
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "HIGH REACTIVITY (2.0)",
+          "fallbackColor": "#FF6347",
+          "direction": "out",
+          "zoomIntensity": 0.3,
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "overall",
+            "reactivity": 2.0
+          }
+        },
+        "startFrame": 30,
+        "durationInFrames": 270
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.8,
+      "fadeIn": 1,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "all",
+        "defaultReactivity": 1.0,
+        "masterIntensity": 1.0
+      }
+    }
+  }
+}

@@ -2,9 +2,75 @@
 
 ## Overview
 
-This Remotion-based rendering engine provides two core visual features for video generation: **GenerativeCanvas** for mathematical art and **HyperspaceText** for 3D text effects. Both components integrate seamlessly with GSAP for advanced animations and are production-ready.
+This Remotion-based rendering engine provides comprehensive video generation capabilities with **Global Audio Orchestration System** for synchronized audio-visual experiences. Core features include mathematical art generation, 3D text effects, audio-reactive components, and a complete library of animation tools. All components integrate seamlessly with GSAP and are production-ready.
 
 ## Core Features
+
+### 🎵 Global Audio Orchestration System
+
+**Advanced audio-visual synchronization across all components**
+
+The Global Audio Orchestration System allows selective audio synchronization across multiple components with master control at the video level. This revolutionary approach enables dynamic audio-reactive effects while maintaining backwards compatibility.
+
+#### Key Features:
+- **4 Sync Modes**: "all", "selective", "none", "manual" for different use cases
+- **Master Controls**: Global reactivity, intensity, and component targeting
+- **Frequency Analysis**: Beat detection, bass, mids, highs, and overall audio levels
+- **Component Overrides**: Individual components can override global settings
+- **Production Safe**: Graceful fallback for configurations without audio
+- **Performance Optimized**: Single audio analysis shared across all components
+
+#### Global Audio Configuration:
+```json
+{
+  "audioConfig": {
+    "audioUrl": "music.mp3",
+    "volume": 0.8,
+    "fadeIn": 1,
+    "fadeOut": 2,
+    "loop": true,
+    "globalSync": {
+      "enabled": true,
+      "mode": "selective",
+      "syncComponents": ["TitleCard", "CountdownTimer"],
+      "defaultReactivity": 1.2,
+      "masterIntensity": 0.9
+    }
+  }
+}
+```
+
+#### Component Audio Sync Props:
+Any component can include audio sync configuration:
+```json
+{
+  "component": "TitleCard",
+  "props": {
+    "text": "FEEL THE BEAT",
+    "audioSync": {
+      "override": true,
+      "enabled": true,
+      "type": "beat",
+      "reactivity": 1.5,
+      "property": "scale"
+    }
+  }
+}
+```
+
+#### Audio Sync Types:
+- **"beat"**: Reacts to detected audio beats (percussion, rhythm)
+- **"bass"**: Syncs to low frequencies (sub-bass, bass)
+- **"mids"**: Syncs to mid frequencies (vocals, melody)
+- **"highs"**: Syncs to high frequencies (treble, cymbals)
+- **"overall"**: Syncs to overall audio levels (full spectrum)
+
+#### Audio-Reactive Effects:
+- **Scale variations**: 1.0 to 1.3x based on audio intensity
+- **Opacity changes**: 0.7 to 1.0 based on audio activity
+- **Beat glow effects**: Text-shadow and box-shadow on beat detection
+- **Color enhancement**: Brightness and saturation boosts
+- **Respect existing animations**: Audio effects layer on top of component animations
 
 ### 1. GenerativeCanvas 🎨
 
@@ -147,24 +213,153 @@ src/components/
 - Responsive design principles
 - Optimized for video rendering pipelines
 
+## Audio-Enhanced Components
+
+### Components with Audio Integration
+
+The following components support the Global Audio Orchestration System:
+
+#### 🎵 TitleCard (Audio-Enhanced)
+Customizable title card with audio sync capabilities:
+- Beat-reactive scaling and glow effects
+- Supports all 5 audio sync types (beat, bass, mids, highs, overall)
+- Configurable reactivity levels (0-2)
+- Component-level overrides available
+
+```json
+{
+  "component": "TitleCard",
+  "props": {
+    "text": "🎵 AUDIO-REACTIVE TITLE",
+    "animationType": "scale",
+    "color": "#00FFFF",
+    "fontSize": 80,
+    "audioSync": {
+      "override": true,
+      "enabled": true,
+      "type": "beat",
+      "reactivity": 1.5
+    }
+  }
+}
+```
+
+#### 🎵 CountdownTimer (Audio-Enhanced)
+Animated countdown with beat-reactive pulse effects:
+- Audio-reactive pulse scaling on top of existing countdown pulse
+- Beat-synchronized glow effects
+- Customizable reactivity and property targeting
+
+```json
+{
+  "component": "CountdownTimer",
+  "props": {
+    "startNumber": 10,
+    "endNumber": 0,
+    "suffix": "!",
+    "color": "#FF6347",
+    "audioSync": {
+      "override": true,
+      "enabled": true,
+      "type": "beat",
+      "reactivity": 1.8
+    }
+  }
+}
+```
+
+#### 🎵 ImageWithZoom (Audio-Enhanced)
+Image display with audio-reactive zoom, brightness, and saturation:
+- Audio-enhanced zoom scaling
+- Beat-synchronized brightness and saturation boosts
+- Production-safe with comprehensive error handling
+
+```json
+{
+  "component": "ImageWithZoom",
+  "props": {
+    "imageUrl": "photo.jpg",
+    "direction": "in",
+    "zoomIntensity": 0.3,
+    "audioSync": {
+      "override": true,
+      "enabled": true,
+      "type": "bass",
+      "reactivity": 2.0
+    }
+  }
+}
+```
+
+### Dedicated Audio Components
+
+#### 🎵 AudioPlayer
+Type 1: Background audio player with fade effects:
+- Volume control and precise timing
+- Fade in/out effects
+- Loop support
+- Production-safe error handling
+
+#### 🎵 BeatReactiveShape
+Type 2: Shape that reacts to audio beats:
+- Multiple shape types (circle, square, triangle)
+- Color changes on beat detection
+- Configurable reactivity levels
+- Real-time frequency analysis
+
+#### 🎵 AudioSyncedText
+Type 2: Text with audio-reactive scaling and effects:
+- Frequency-specific synchronization
+- Glow effects synchronized with audio
+- Customizable reactivity and base sizing
+- Real-time audio analysis
+
+## Production Implementation Guide
+
+### Basic Audio Integration
+1. **Add global audio configuration** to your JSON request
+2. **Choose sync mode** based on your needs:
+   - "all": Every component syncs (exclude specific ones if needed)
+   - "selective": Only specified components sync
+   - "none": Background audio only
+   - "manual": Components opt-in individually
+3. **Configure master controls** for consistent behavior
+4. **Override individual components** for custom effects
+
+### Performance Considerations
+- **Single audio analysis**: Shared across all components for optimal performance
+- **Conditional provider**: Only loads audio system when needed
+- **Backwards compatible**: Existing videos work unchanged
+- **Production safe**: Graceful fallback for invalid audio URLs
+
+### CORS and Audio Files
+- **Use local files**: Place audio in `public/` folder for best results
+- **Avoid external URLs**: May cause CORS issues in video rendering
+- **Supported formats**: MP3, WAV, OGG, M4A
+
 ## Future Enhancements
 
-While Three.js integration was explored, the current implementation focuses on Canvas and CSS-based effects for:
+While Three.js integration was explored, the current implementation focuses on Canvas and CSS-based effects combined with advanced audio analysis for:
 - Better performance in video rendering
 - Reduced bundle size
 - Simplified deployment
 - More reliable cross-platform compatibility
+- Revolutionary audio-visual synchronization
 
-The GenerativeCanvas and HyperspaceText components provide powerful visual effects without the complexity of 3D rendering engines, making them perfect for production video generation workflows.
+The Global Audio Orchestration System represents a major leap forward in automated video generation, providing Hollywood-level audio-visual synchronization with simple JSON configuration.
 
 ## Development Status
 
 ✅ **Production Ready**
-- Both components fully tested
-- Comprehensive prop documentation
-- Type-safe implementations
-- GSAP integration optimized
-- Error handling robust
+- **Global Audio Orchestration System**: Fully implemented and tested
+- **Audio-enhanced components**: TitleCard, CountdownTimer, ImageWithZoom
+- **Dedicated audio components**: AudioPlayer, BeatReactiveShape, AudioSyncedText
+- **10 comprehensive test cases**: Covering all audio orchestration scenarios
+- **Backwards compatibility**: 100% preserved for existing videos
+- **Production safety**: Comprehensive error handling and graceful fallbacks
+- **Type-safe implementations**: Full TypeScript support
+- **GSAP integration optimized**: Advanced animations with audio sync
+- **Performance optimized**: Single audio analysis shared across components
 
 ## Getting Started
 

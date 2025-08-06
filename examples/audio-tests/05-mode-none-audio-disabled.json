@@ -1,0 +1,60 @@
+{
+  "name": "Global Audio Mode: NONE - Audio Sync Completely Disabled",
+  "description": "Test case where audio sync is globally disabled, all components stay static",
+  "testCase": "global_audio_mode_none",
+  "expectedBehavior": "ALL components remain static with their original animations only. Audio plays as background but no components react to it.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "AUDIO SYNC DISABLED",
+          "color": "#A0A0A0",
+          "fontSize": 64,
+          "animationType": "slideUp"
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 1,
+          "color": "#B0B0B0",
+          "fontSize": 110,
+          "prefix": "STATIC "
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "BACKGROUND MUSIC ONLY",
+          "fallbackColor": "#808080",
+          "direction": "in",
+          "zoomIntensity": 0.25
+        },
+        "startFrame": 30,
+        "durationInFrames": 270
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.6,
+      "fadeIn": 2,
+      "fadeOut": 2,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "none",
+        "defaultReactivity": 1.0,
+        "masterIntensity": 1.0
+      }
+    }
+  }
+}

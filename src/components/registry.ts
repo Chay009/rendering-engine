@@ -13,7 +13,7 @@ export interface ComponentProp {
 export interface ComponentMeta {
   name: string;
   description: string;
-  category: 'text' | 'image' | 'animation' | 'transition' | 'utility';
+  category: 'text' | 'image' | 'animation' | 'transition' | 'utility' | 'audio';
   props: ComponentProp[];
   examples: Array<{
     description: string;
@@ -24,13 +24,14 @@ export interface ComponentMeta {
 export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
   TitleCard: {
     name: 'TitleCard',
-    description: 'A customizable title card with various animation options',
+    description: '🎵 Audio-enhanced customizable title card with various animation options and audio sync capabilities',
     category: 'text',
     props: [
       { name: 'text', type: 'string', required: true, description: 'The text to display' },
       { name: 'color', type: 'string', required: false, default: '#FFFFFF', description: 'Text color' },
       { name: 'fontSize', type: 'number', required: false, default: 96, description: 'Font size in pixels' },
-      { name: 'animationType', type: 'string', required: false, default: 'fadeIn', description: 'Animation style', options: ['fadeIn', 'slideUp', 'scale'] }
+      { name: 'animationType', type: 'string', required: false, default: 'fadeIn', description: 'Animation style', options: ['fadeIn', 'slideUp', 'scale'] },
+      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: { override?: boolean, enabled?: boolean, type?: "beat"|"bass"|"mids"|"highs"|"overall", reactivity?: 0-2, property?: "scale"|"opacity"|"color"|"all" }. Overrides global audio settings when override: true.' }
     ],
     examples: [
       {
@@ -40,13 +41,22 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
       {
         description: 'Red title with slide up animation',
         props: { text: 'Hello World', color: '#FF0000', animationType: 'slideUp', fontSize: 120 }
+      },
+      {
+        description: '🎵 Audio-reactive title with beat sync',
+        props: { 
+          text: 'FEEL THE BEAT', 
+          color: '#00FFFF', 
+          animationType: 'scale',
+          audioSync: { override: true, enabled: true, type: 'beat', reactivity: 1.5 }
+        }
       }
     ]
   },
 
   ImageWithZoom: {
     name: 'ImageWithZoom',
-    description: '🛡️ PRODUCTION-SAFE image component with zoom animation and comprehensive error handling for invalid URLs',
+    description: '🎵🛡️ PRODUCTION-SAFE audio-enhanced image component with zoom animation, comprehensive error handling, and audio sync capabilities',
     category: 'image',
     props: [
       { name: 'imageUrl', type: 'string', required: false, description: '✅ OPTIONAL: URL of the image to display (supports graceful fallback for invalid/placeholder URLs)' },
@@ -54,7 +64,8 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
       { name: 'direction', type: 'string', required: false, default: 'in', description: 'Zoom direction', options: ['in', 'out'] },
       { name: 'fit', type: 'string', required: false, default: 'cover', description: 'Image fit style', options: ['cover', 'contain', 'fill'] },
       { name: 'fallbackText', type: 'string', required: false, default: 'Image not available', description: '🛡️ SAFETY: Custom text shown when image fails to load' },
-      { name: 'fallbackColor', type: 'string', required: false, default: '#333', description: '🛡️ SAFETY: Background color for fallback UI' }
+      { name: 'fallbackColor', type: 'string', required: false, default: '#333', description: '🛡️ SAFETY: Background color for fallback UI' },
+      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: { override?: boolean, enabled?: boolean, type?: "beat"|"bass"|"mids"|"highs"|"overall", reactivity?: 0-2, property?: "scale"|"opacity"|"color"|"all" }. Adds audio-reactive zoom scaling, brightness, and saturation effects.' }
     ],
     examples: [
       {
@@ -72,6 +83,15 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
       {
         description: '🛡️ SAFE: No imageUrl provided (tests optional nature)',
         props: { direction: 'in', fallbackText: 'No image provided', fallbackColor: '#4169E1' }
+      },
+      {
+        description: '🎵 Audio-reactive image with bass sync',
+        props: { 
+          imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+          direction: 'in',
+          zoomIntensity: 0.3,
+          audioSync: { override: true, enabled: true, type: 'bass', reactivity: 2.0 }
+        }
       }
     ]
   },
@@ -100,7 +120,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
 
   CountdownTimer: {
     name: 'CountdownTimer',
-    description: 'Animated countdown timer with customizable range and formatting',
+    description: '🎵 Audio-enhanced animated countdown timer with customizable range, formatting, and beat-reactive pulse effects',
     category: 'utility',
     props: [
       { name: 'startNumber', type: 'number', required: true, description: 'Starting number for countdown' },
@@ -109,7 +129,8 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
       { name: 'fontSize', type: 'number', required: false, default: 128, description: 'Font size in pixels' },
       { name: 'prefix', type: 'string', required: false, default: '', description: 'Text before the number' },
       { name: 'suffix', type: 'string', required: false, default: '', description: 'Text after the number' },
-      { name: 'duration', type: 'number', required: false, default: 150, description: 'Duration in frames for the countdown animation' }
+      { name: 'duration', type: 'number', required: false, default: 150, description: 'Duration in frames for the countdown animation' },
+      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: { override?: boolean, enabled?: boolean, type?: "beat"|"bass"|"mids"|"highs"|"overall", reactivity?: 0-2, property?: "scale"|"opacity"|"color"|"all" }. Adds audio-reactive pulse scaling and glow effects on top of existing countdown pulse.' }
     ],
     examples: [
       {
@@ -123,6 +144,16 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
       {
         description: 'Fast countdown with custom duration',
         props: { startNumber: 5, endNumber: 1, suffix: '!', duration: 90 }
+      },
+      {
+        description: '🎵 Audio-reactive countdown with beat pulse',
+        props: { 
+          startNumber: 10, 
+          endNumber: 0, 
+          suffix: '!', 
+          color: '#FF6347',
+          audioSync: { override: true, enabled: true, type: 'beat', reactivity: 1.8 }
+        }
       }
     ]
   },
@@ -538,7 +569,131 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
     ]
   },
 
+  // Audio Components - Type 1: Background + Type 2: Audio-Synced
+  AudioPlayer: {
+    name: 'AudioPlayer',
+    description: '🎵 Type 1: Background audio player with fade effects and volume control',
+    category: 'audio',
+    props: [
+      { name: 'audioUrl', type: 'string', required: false, description: 'URL of the audio file to play' },
+      { name: 'volume', type: 'number', required: false, default: 1, description: 'Audio volume (0-1)' },
+      { name: 'startTime', type: 'number', required: false, default: 0, description: 'Start time in seconds' },
+      { name: 'fadeIn', type: 'number', required: false, default: 0, description: 'Fade in duration in seconds' },
+      { name: 'fadeOut', type: 'number', required: false, default: 0, description: 'Fade out duration in seconds' },
+      { name: 'loop', type: 'boolean', required: false, default: false, description: 'Loop the audio' },
+    ],
+    examples: [
+      {
+        description: 'Background music with fade effects',
+        props: {
+          audioUrl: 'https://example.com/background-music.mp3',
+          volume: 0.8,
+          fadeIn: 2,
+          fadeOut: 3,
+          loop: true,
+        },
+      },
+      {
+        description: 'Narration audio with precise timing',
+        props: {
+          audioUrl: 'https://example.com/narration.wav',
+          volume: 1,
+          startTime: 5,
+          fadeIn: 1,
+          loop: false,
+        },
+      },
+    ],
+  },
 
+  BeatReactiveShape: {
+    name: 'BeatReactiveShape',
+    description: '🎵 Type 2: Shape that reacts to audio beats and frequency analysis',
+    category: 'audio',
+    props: [
+      { name: 'audioUrl', type: 'string', required: false, description: 'URL of the audio file for analysis' },
+      { name: 'baseColor', type: 'string', required: false, default: '#333333', description: 'Base color of the shape' },
+      { name: 'beatColor', type: 'string', required: false, default: '#FF6347', description: 'Color when beat is detected' },
+      { name: 'shape', type: 'string', required: false, default: 'circle', description: 'Shape type', options: ['circle', 'square', 'triangle'] },
+      { name: 'size', type: 'number', required: false, default: 100, description: 'Size of the shape in pixels' },
+      { name: 'reactivity', type: 'number', required: false, default: 1, description: 'How reactive to audio (0-2)' },
+    ],
+    examples: [
+      {
+        description: 'Circle that pulses to the beat',
+        props: {
+          audioUrl: 'https://example.com/electronic-beat.mp3',
+          shape: 'circle',
+          beatColor: '#00FFFF',
+          reactivity: 1.5,
+          size: 150,
+        },
+      },
+      {
+        description: 'Square that reacts to bass frequencies',
+        props: {
+          audioUrl: 'https://example.com/bass-heavy.wav',
+          shape: 'square',
+          baseColor: '#1a1a1a',
+          beatColor: '#FF1493',
+          reactivity: 2,
+          size: 120,
+        },
+      },
+    ],
+  },
+
+  AudioSyncedText: {
+    name: 'AudioSyncedText',
+    description: '🎵 Type 2: Text that scales and reacts to audio frequency analysis',
+    category: 'audio',
+    props: [
+      { name: 'text', type: 'string', required: true, description: 'Text to display' },
+      { name: 'audioUrl', type: 'string', required: false, description: 'URL of the audio file for analysis' },
+      { name: 'baseSize', type: 'number', required: false, default: 48, description: 'Base font size in pixels' },
+      { name: 'color', type: 'string', required: false, default: '#FFFFFF', description: 'Text color' },
+      { name: 'syncType', type: 'string', required: false, default: 'overall', description: 'Audio frequency to sync to', options: ['bass', 'mids', 'highs', 'overall'] },
+      { name: 'reactivity', type: 'number', required: false, default: 1, description: 'How reactive to audio (0-2)' },
+      { name: 'glowEffect', type: 'boolean', required: false, default: false, description: 'Add glow effect synchronized with audio' },
+    ],
+    examples: [
+      {
+        description: 'Title that reacts to bass frequencies',
+        props: {
+          text: 'FEEL THE BEAT',
+          audioUrl: 'https://example.com/music.mp3',
+          syncType: 'bass',
+          baseSize: 72,
+          color: '#FF6347',
+          glowEffect: true,
+          reactivity: 1.5,
+        },
+      },
+      {
+        description: 'Subtitle synced to overall audio levels',
+        props: {
+          text: 'Audio Visualization',
+          audioUrl: 'https://example.com/ambient.wav',
+          syncType: 'overall',
+          baseSize: 36,
+          color: '#00FFFF',
+          reactivity: 1,
+        },
+      },
+      {
+        description: 'High-frequency reactive text',
+        props: {
+          text: 'TREBLE BOOST',
+          audioUrl: 'https://example.com/electronic.mp3',
+          syncType: 'highs',
+          baseSize: 48,
+          color: '#FFD700',
+          glowEffect: true,
+          reactivity: 2,
+        },
+      },
+    ],
+  },
 };
 
 /**
@@ -575,6 +730,83 @@ export const generateComponentDocs = (): string => {
 };
 
 /**
+ * 🎵 GLOBAL AUDIO ORCHESTRATION SYSTEM - MAJOR ARCHITECTURE UPDATE
+ * 
+ * CRITICAL: This rendering engine now supports GLOBAL AUDIO SYNCHRONIZATION
+ * across all components. This is a comprehensive audio-visual orchestration system.
+ * 
+ * 🎯 GLOBAL AUDIO MODES:
+ * 1. "all" - Every component syncs with audio (respects excludeComponents)
+ * 2. "selective" - Only components listed in syncComponents array sync
+ * 3. "none" - No components sync, audio plays as background only
+ * 4. "manual" - Components must explicitly opt-in with audioSync prop
+ * 
+ * 🎛️ MASTER CONTROLS:
+ * - enabled: boolean - Global on/off switch for entire video
+ * - defaultReactivity: 0-2 - Base reactivity level for all syncing components
+ * - masterIntensity: 0-1 - Master volume control for all audio effects
+ * - syncComponents: string[] - Whitelist of component names (selective mode)
+ * - excludeComponents: string[] - Blacklist of component names (all mode)
+ * 
+ * 🎵 COMPONENT AUDIO SYNC TYPES:
+ * - "beat": Reacts to detected audio beats (percussion, rhythm)
+ * - "bass": Syncs to low frequencies (0-4 bands, sub-bass, bass)
+ * - "mids": Syncs to mid frequencies (4-16 bands, vocals, melody)
+ * - "highs": Syncs to high frequencies (16-32 bands, treble, cymbals)
+ * - "overall": Syncs to overall audio levels (full spectrum average)
+ * 
+ * 🎨 AUDIO-REACTIVE EFFECTS APPLIED:
+ * - Scale variations (1.0 to 1.3x based on audio intensity)
+ * - Opacity changes (0.7 to 1.0 based on audio activity)
+ * - Glow effects on beat detection (text-shadow, box-shadow)
+ * - Color brightness/saturation boosts on beats
+ * - All effects respect component's original animations
+ * 
+ * 📋 JSON CONFIGURATION EXAMPLES:
+ * 
+ * GLOBAL SYNC - All components:
+ * {
+ *   "audioConfig": {
+ *     "audioUrl": "music.mp3",
+ *     "globalSync": {
+ *       "enabled": true,
+ *       "mode": "all",
+ *       "defaultReactivity": 1.5,
+ *       "masterIntensity": 0.8
+ *     }
+ *   }
+ * }
+ * 
+ * SELECTIVE SYNC - Choose components:
+ * {
+ *   "audioConfig": {
+ *     "globalSync": {
+ *       "enabled": true,
+ *       "mode": "selective",
+ *       "syncComponents": ["TitleCard", "CountdownTimer"]
+ *     }
+ *   }
+ * }
+ * 
+ * COMPONENT OVERRIDE - Custom per-component:
+ * {
+ *   "component": "TitleCard",
+ *   "props": {
+ *     "audioSync": {
+ *       "override": true,
+ *       "enabled": true,
+ *       "type": "bass",
+ *       "reactivity": 2.0
+ *     }
+ *   }
+ * }
+ * 
+ * 🏗️ ARCHITECTURE:
+ * - GlobalAudioProvider: Wraps entire video, provides shared audio analysis
+ * - useAudioEnhancedProps: Hook for components to get audio-reactive values
+ * - Single audio file analysis shared across ALL components for performance
+ * - Backwards compatible: Existing videos work unchanged
+ * 
  * 🛡️ PRODUCTION SAFETY GUIDELINES
  * 
  * CRITICAL: All components handling external resources (images, audio, video)
@@ -589,10 +821,11 @@ export const generateComponentDocs = (): string => {
  * 
  * EXAMPLE SAFE PATTERNS:
  * - ImageWithZoom: ✅ Production-ready with comprehensive error handling
- * - AudioPlayer: ❌ TODO: Apply same safety patterns
- * - VideoPlayer: ❌ TODO: Apply same safety patterns
+ * - AudioPlayer: ✅ Production-ready with error handling
+ * - All components: ✅ Audio sync with graceful degradation
  * 
  * For detailed implementation guide, see:
+ * - GLOBAL_AUDIO_ORCHESTRATION_SUMMARY.md
  * - IMAGE_HANDLING_AND_ERROR_PREVENTION.md
  * - COMPONENT_DEVELOPMENT_BEST_PRACTICES.md
  * - MISTAKES_AND_FIXES.md (Section #0)
@@ -614,6 +847,10 @@ export const getComponentSafetyStatus = (): Record<string, 'SAFE' | 'NEEDS_UPDAT
     HyperspaceText: 'SAFE',         // No external resources, pure procedural effects
     GenerativeCanvas: 'SAFE',       // No external resources, pure mathematical canvas art
     MinimalTest: 'SAFE',            // No external resources
-    // Add new components here with their safety status
+    
+    // Audio Components - 🎵 PRODUCTION SAFE
+    AudioPlayer: 'SAFE',            // ✅ Graceful fallback for invalid audio URLs
+    BeatReactiveShape: 'SAFE',      // ✅ Safe fallback when no audio provided
+    AudioSyncedText: 'SAFE',        // ✅ Safe fallback when no audio provided
   };
 };

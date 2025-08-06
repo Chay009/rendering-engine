@@ -1,0 +1,58 @@
+{
+  "name": "Start Again Audio Example - ✅ CONFIRMED WORKING",
+  "description": "Using your start-again.mp3 file - Audio tested and working in VLC",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "AudioSyncedText",
+        "props": {
+          "text": "🎵 START AGAIN",
+          "audioUrl": "start-again.mp3",
+          "baseSize": 72,
+          "color": "#00FFFF",
+          "syncType": "overall",
+          "reactivity": 1.5,
+          "glowEffect": true
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "BeatReactiveShape",
+        "props": {
+          "audioUrl": "start-again.mp3",
+          "shape": "circle",
+          "baseColor": "#2a2a2a",
+          "beatColor": "#FF6347",
+          "size": 200,
+          "reactivity": 2
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "AudioSyncedText",
+        "props": {
+          "text": "BASS",
+          "audioUrl": "start-again.mp3",
+          "baseSize": 32,
+          "color": "#FF4444",
+          "syncType": "bass",
+          "reactivity": 2.5
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.8,
+      "fadeIn": 1,
+      "fadeOut": 2,
+      "loop": true
+    }
+  }
+}

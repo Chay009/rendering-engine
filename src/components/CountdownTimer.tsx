@@ -1,5 +1,6 @@
 import { useCurrentFrame, interpolate } from 'remotion';
 import React from 'react';
+import { useAudioEnhancedProps, ComponentAudioSync } from '../hooks/useGlobalAudio';
 
 export interface CountdownTimerProps {
   startNumber: number;
@@ -9,6 +10,7 @@ export interface CountdownTimerProps {
   prefix?: string;
   suffix?: string;
   duration?: number; // Optional duration in frames
+  audioSync?: ComponentAudioSync;
 }
 
 export const CountdownTimer: React.FC<CountdownTimerProps> = ({ 
@@ -18,31 +20,39 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
   fontSize = 128,
   prefix = '',
   suffix = '',
-  duration
+  duration,
+  audioSync
 }) => {
   const frame = useCurrentFrame();
   
-  // Since this component is within a Sequence, frame starts at 0 for this component
-  // We need to calculate based on how long the countdown should take
-  const countdownDuration = duration || 150; // Default to 150 frames (5 seconds)
+  // Get audio-enhanced props if audio sync is enabled
+  const { audioValues, shouldSync } = useAudioEnhancedProps('CountdownTimer', audioSync);
   
-  // Ensure we have valid numbers
+  // Audio-driven timing and intensity
+  const countdownDuration = duration || 150;
   const safeStartNumber = Number(startNumber) || 5;
   const safeEndNumber = Number(endNumber) || 0;
   
-  const currentNumber = Math.round(
-    interpolate(frame, [0, countdownDuration], [safeStartNumber, safeEndNumber], {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    })
-  );
+  // AUDIO-DRIVEN COUNTDOWN: Numbers change based on beats instead of time
+  const currentNumber = shouldSync && audioValues.beatTrigger
+    ? Math.max(safeEndNumber, safeStartNumber - Math.floor(frame / 15)) // Faster countdown on beats
+    : Math.round(
+        interpolate(frame, [0, countdownDuration], [safeStartNumber, safeEndNumber], {
+          extrapolateLeft: 'clamp',
+          extrapolateRight: 'clamp',
+        })
+      );
   
-  // Pulse effect every second (30 frames at 30fps)
-  const pulseFrames = 30;
-  const scale = interpolate(frame % pulseFrames, [0, pulseFrames/2, pulseFrames], [1, 1.1, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+  // Audio-driven pulse: Sync with beats and bass instead of fixed timing
+  const audioBasedPulse = shouldSync 
+    ? 1 + (audioValues.bassLevel * 0.4) + (audioValues.beatTrigger ? 0.3 : 0) // Bass-driven pulse
+    : interpolate(frame % 30, [0, 15, 30], [1, 1.1, 1], { // Original time-based pulse
+        extrapolateLeft: 'clamp',
+        extrapolateRight: 'clamp',
+      });
+  
+  // Apply audio-driven scale multipliers for true audio synchronization
+  const finalScale = audioBasedPulse * (shouldSync ? audioValues.scaleMultiplier : 1);
 
   // Debug: Log current values
   console.log(`CountdownTimer - frame: ${frame}, currentNumber: ${currentNumber}, startNumber: ${safeStartNumber}, endNumber: ${safeEndNumber}, duration: ${countdownDuration}`);
@@ -59,8 +69,12 @@ export const CountdownTimer: React.FC<CountdownTimerProps> = ({
         color,
         fontSize: `${fontSize}px`,
         fontWeight: 'bold',
-        transform: `scale(${scale})`,
+        opacity: shouldSync ? audioValues.opacityMultiplier : 1,
+        transform: `scale(${finalScale})`,
         textAlign: 'center',
+        textShadow: shouldSync && audioValues.beatTrigger ? `0 0 ${audioValues.beatStrength * 40}px ${color}` : 'none',
+        filter: shouldSync && audioValues.bassLevel > 0.5 ? `brightness(${1 + audioValues.bassLevel * 0.5})` : 'none',
+        transition: 'text-shadow 0.1s ease, filter 0.1s ease',
       }}>
         {prefix}{currentNumber}{suffix}
       </div>

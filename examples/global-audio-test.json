@@ -1,0 +1,59 @@
+{
+  "name": "Global Audio Sync Test - Selective Mode",
+  "description": "Quick test with TitleCard and CountdownTimer syncing to audio beats",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "🎵 GLOBAL SYNC TEST",
+          "color": "#00FFFF",
+          "fontSize": 64,
+          "animationType": "scale"
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 10,
+          "endNumber": 0,
+          "color": "#FF6347",
+          "fontSize": 96,
+          "suffix": "!"
+        },
+        "startFrame": 90,
+        "durationInFrames": 210
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "STATIC (NO SYNC)",
+          "fallbackColor": "#333333",
+          "direction": "in",
+          "zoomIntensity": 0.2
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.8,
+      "fadeIn": 1,
+      "fadeOut": 2,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "selective",
+        "syncComponents": ["TitleCard", "CountdownTimer"],
+        "defaultReactivity": 1.5,
+        "masterIntensity": 0.9
+      }
+    }
+  }
+}

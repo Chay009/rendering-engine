@@ -1,0 +1,61 @@
+{
+  "name": "Global Audio Mode: SELECTIVE - Choose Specific Components",
+  "description": "Test case where only TitleCard and CountdownTimer sync, ImageWithZoom stays static",
+  "testCase": "global_audio_mode_selective",
+  "expectedBehavior": "Only TitleCard and CountdownTimer react to audio. ImageWithZoom should remain completely static with no audio effects.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "I SYNC WITH AUDIO",
+          "color": "#00FF00",
+          "fontSize": 68,
+          "animationType": "fadeIn"
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 8,
+          "endNumber": 0,
+          "color": "#FFD700",
+          "fontSize": 120,
+          "prefix": "T-",
+          "suffix": "!"
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "I'M STATIC (NO SYNC)",
+          "fallbackColor": "#666666",
+          "direction": "out",
+          "zoomIntensity": 0.1
+        },
+        "startFrame": 30,
+        "durationInFrames": 270
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.8,
+      "fadeIn": 1,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "selective",
+        "syncComponents": ["TitleCard", "CountdownTimer"],
+        "defaultReactivity": 1.5,
+        "masterIntensity": 1.0
+      }
+    }
+  }
+}

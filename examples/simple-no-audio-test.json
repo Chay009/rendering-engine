@@ -1,0 +1,21 @@
+{
+  "name": "Simple No Audio Test",
+  "description": "Direct structure test without audio config",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "NO AUDIO TEST",
+          "color": "#FFFFFF",
+          "fontSize": 64
+        },
+        "startFrame": 0,
+        "durationInFrames": 90
+      }
+    ]
+  }
+}

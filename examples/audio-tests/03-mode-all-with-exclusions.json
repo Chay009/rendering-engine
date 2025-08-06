@@ -1,0 +1,60 @@
+{
+  "name": "Global Audio Mode: ALL with Exclusions",
+  "description": "Test case where all components sync EXCEPT those in excludeComponents array",
+  "testCase": "global_audio_mode_all_with_exclusions",
+  "expectedBehavior": "TitleCard and CountdownTimer sync with audio. ImageWithZoom is excluded and stays static despite mode being 'all'.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "SYNCING (NOT EXCLUDED)",
+          "color": "#FF1493",
+          "fontSize": 60,
+          "animationType": "slideUp"
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 6,
+          "endNumber": 1,
+          "color": "#32CD32",
+          "fontSize": 100,
+          "suffix": " SEC"
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "EXCLUDED FROM SYNC",
+          "fallbackColor": "#8B4513",
+          "direction": "in",
+          "zoomIntensity": 0.2
+        },
+        "startFrame": 30,
+        "durationInFrames": 270
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.9,
+      "fadeIn": 1.5,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "all",
+        "excludeComponents": ["ImageWithZoom"],
+        "defaultReactivity": 1.8,
+        "masterIntensity": 0.8
+      }
+    }
+  }
+}

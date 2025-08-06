@@ -1,0 +1,69 @@
+{
+  "name": "Fixed Audio Example - CORS Safe with Global Orchestration",
+  "description": "Corrected version using local audio file and global audio orchestration",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "AudioSyncedText",
+        "props": {
+          "text": "SONICSTREAM",
+          "baseSize": 120,
+          "color": "#FFD700",
+          "glowEffect": true,
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "bass",
+            "reactivity": 1.5
+          }
+        },
+        "startFrame": 0,
+        "durationInFrames": 90
+      },
+      {
+        "component": "BeatReactiveShape",
+        "props": {
+          "shape": "circle",
+          "baseColor": "#110011",
+          "beatColor": "#00FFFF",
+          "size": 300,
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "beat",
+            "reactivity": 2.0
+          }
+        },
+        "startFrame": 90,
+        "durationInFrames": 240
+      },
+      {
+        "component": "GsapTitle",
+        "props": {
+          "text": "High-Fidelity Audio.",
+          "animationType": "stagger",
+          "color": "#FFFFFF",
+          "fontSize": 64
+        },
+        "startFrame": 150,
+        "durationInFrames": 60
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.9,
+      "fadeOut": 2,
+      "loop": false,
+      "globalSync": {
+        "enabled": true,
+        "mode": "selective",
+        "syncComponents": ["AudioSyncedText", "BeatReactiveShape"],
+        "defaultReactivity": 1.0,
+        "masterIntensity": 1.0
+      }
+    }
+  }
+}

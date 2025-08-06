@@ -95,7 +95,11 @@ export const makeRenderQueue = ({
         // Validate the video request
         const validationResult = VideoRequestSchema.safeParse(videoRequest);
         if (!validationResult.success) {
-          throw new Error(`Invalid video request: ${JSON.stringify(validationResult.error.formErrors)}`);
+          console.error('🚨 Validation failed:', JSON.stringify(validationResult.error, null, 2));
+          throw new Error(`Invalid video request: ${JSON.stringify({
+            formErrors: validationResult.error.formErrors,
+            fieldErrors: validationResult.error.fieldErrors
+          })}`);
         }
 
         console.log(`✅ Validation took: ${Date.now() - validationStart}ms`);

@@ -1,0 +1,33 @@
+{
+  "name": "Backwards Compatibility Test - No Audio Config",
+  "description": "Test that older configurations without audio still work correctly",
+  "dynamicData": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "NO AUDIO CONFIG",
+          "color": "#FFFFFF",
+          "fontSize": 72,
+          "animationType": "fadeIn"
+        },
+        "startFrame": 0,
+        "durationInFrames": 120
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 5,
+          "endNumber": 1,
+          "color": "#00FF00",
+          "fontSize": 100
+        },
+        "startFrame": 60,
+        "durationInFrames": 90
+      }
+    ]
+  }
+}

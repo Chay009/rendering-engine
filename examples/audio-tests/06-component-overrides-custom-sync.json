@@ -1,0 +1,77 @@
+{
+  "name": "Component Override Tests - Custom Audio Sync Per Component",
+  "description": "Test case demonstrating component-level overrides with different sync types and reactivity levels",
+  "testCase": "component_audio_overrides",
+  "expectedBehavior": "Each component uses its own custom audio sync settings, ignoring global defaults. TitleCard=bass, CountdownTimer=highs, ImageWithZoom=overall.",
+  "request": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "timeline": [
+      {
+        "component": "TitleCard",
+        "props": {
+          "text": "BASS FREQUENCIES",
+          "color": "#FF0000",
+          "fontSize": 72,
+          "animationType": "scale",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "bass",
+            "reactivity": 2.5
+          }
+        },
+        "startFrame": 0,
+        "durationInFrames": 300
+      },
+      {
+        "component": "CountdownTimer",
+        "props": {
+          "startNumber": 10,
+          "endNumber": 0,
+          "color": "#00FF00",
+          "fontSize": 100,
+          "suffix": " HIGH",
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "highs",
+            "reactivity": 1.8
+          }
+        },
+        "startFrame": 60,
+        "durationInFrames": 240
+      },
+      {
+        "component": "ImageWithZoom",
+        "props": {
+          "fallbackText": "OVERALL LEVELS",
+          "fallbackColor": "#0000FF",
+          "direction": "in",
+          "zoomIntensity": 0.4,
+          "audioSync": {
+            "override": true,
+            "enabled": true,
+            "type": "overall",
+            "reactivity": 1.2
+          }
+        },
+        "startFrame": 30,
+        "durationInFrames": 270
+      }
+    ],
+    "audioConfig": {
+      "audioUrl": "start-again.mp3",
+      "volume": 0.9,
+      "fadeIn": 1,
+      "loop": true,
+      "globalSync": {
+        "enabled": true,
+        "mode": "all",
+        "defaultReactivity": 1.0,
+        "masterIntensity": 1.0
+      }
+    }
+  }
+}
