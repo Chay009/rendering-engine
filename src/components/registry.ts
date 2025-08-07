@@ -671,7 +671,7 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
 
   GSAPHingeZoom: {
     name: 'GSAPHingeZoom',
-    description: '🔥 TRUE GSAP hinge effect - exact recreation of scroll-based GSAP reference: word zooms → hinges → target letter emerges and zooms massively',
+    description: '🔥 TRUE GSAP hinge effect with audio-reactive timeline - GSAP animation speed synced with audio beats and intensity',
     category: 'animation',
     props: [
       { name: 'text', type: 'string', required: false, default: 'EXPLORE', description: 'Text to animate with true hinge effect' },
@@ -690,7 +690,13 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
       { name: 'hingeRotationAngle', type: 'number', required: false, default: 90, description: 'Hinge rotation angle in degrees' },
       { name: 'perspective', type: 'number', required: false, default: 800, description: '3D perspective value in pixels' },
       { name: 'transformOrigin', type: 'string', required: false, default: 'center top', description: 'Transform origin for hinge rotation' },
-      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: Adds beat-reactive effects to the hinge animation phases.' }
+      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: Adds beat-reactive visual effects (glow, opacity, background)' },
+      { name: 'audioTimelineSync', type: 'boolean', required: false, default: false, description: '🔥 NEW: Enable audio-reactive GSAP timeline speed - timeline speed responds to audio intensity and beats' },
+      { name: 'maxTimelineSpeed', type: 'number', required: false, default: 2.0, description: 'Maximum timeline speed multiplier when audio-reactive' },
+      { name: 'minTimelineSpeed', type: 'number', required: false, default: 0.5, description: 'Minimum timeline speed multiplier when audio-reactive' },
+      { name: 'timelineSmoothing', type: 'number', required: false, default: 0.8, description: 'Speed change smoothing factor (0-1, higher = smoother)' },
+      { name: 'beatPause', type: 'boolean', required: false, default: false, description: 'Pause timeline momentarily on strong beats for dramatic effect' },
+      { name: 'beatResume', type: 'boolean', required: false, default: true, description: 'Resume timeline after beat pause' }
     ],
     examples: [
       {
@@ -755,6 +761,48 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
           hingeRotationDuration: 45,
           fadeOutDuration: 30,
           letterZoomDuration: 90
+        }
+      },
+      {
+        description: '🔥 NEW: Audio-reactive timeline - GSAP speed synced with audio beats',
+        props: {
+          text: 'SYNC TEST',
+          targetLetterIndex: 0,
+          fontSize: 150,
+          color: '#FF6347',
+          backgroundColor: '#000011',
+          audioSync: {
+            override: true,
+            enabled: true,
+            type: 'beat',
+            reactivity: 1.5,
+            property: 'all'
+          },
+          audioTimelineSync: true,
+          maxTimelineSpeed: 2.5,
+          minTimelineSpeed: 0.3,
+          timelineSmoothing: 0.7
+        }
+      },
+      {
+        description: '🎵 Beat pause effect - timeline pauses dramatically on beats',
+        props: {
+          text: 'BEAT PAUSE',
+          targetLetterIndex: 5,
+          fontSize: 140,
+          color: '#00FFFF',
+          backgroundColor: '#110022',
+          audioSync: {
+            override: true,
+            enabled: true,
+            type: 'bass',
+            reactivity: 2.0
+          },
+          audioTimelineSync: true,
+          maxTimelineSpeed: 1.8,
+          minTimelineSpeed: 0.5,
+          beatPause: true,
+          beatResume: true
         }
       }
     ]

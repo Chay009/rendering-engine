@@ -180,6 +180,7 @@
                 <button class="example-button" onclick="loadMarketingAd(3)">🎯 SELECTIVE Ad</button>
                 <button class="example-button" onclick="loadComprehensiveTest()">🚀 Full Test Suite</button>
                 <button class="example-button" onclick="loadGSAPHingeTest()">🔥 GSAP Hinge Effect</button>
+                <button class="example-button" onclick="loadAudioTimelineTest()">🎵 Audio Timeline Sync</button>
                 <button class="example-button" onclick="loadLetterFlickeringTest()">🎪 Letter Flickering</button>
                 <button class="example-button" onclick="clearJSON()">Clear</button>
             </div>
@@ -1327,6 +1328,97 @@
             };
             
             document.getElementById('jsonInput').value = JSON.stringify(trueHingeJSON, null, 2);
+        }
+
+        // Load Audio Timeline Sync test - GSAP timeline speed synced with audio
+        function loadAudioTimelineTest() {
+            const audioTimelineJSON = {
+                "request": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "GSAPHingeZoom",
+                            "props": {
+                                "text": "SYNC TEST",
+                                "targetLetterIndex": 0,
+                                "fontSize": 150,
+                                "color": "#FF6347",
+                                "backgroundColor": "#000011",
+                                "audioSync": {
+                                    "override": true,
+                                    "enabled": true,
+                                    "type": "beat",
+                                    "reactivity": 1.5,
+                                    "property": "all"
+                                },
+                                "audioTimelineSync": true,
+                                "maxTimelineSpeed": 2.5,
+                                "minTimelineSpeed": 0.3,
+                                "timelineSmoothing": 0.7,
+                                "beatPause": false,
+                                "beatResume": true
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 180
+                        },
+                        {
+                            "component": "GSAPHingeZoom",
+                            "props": {
+                                "text": "BEAT PAUSE",
+                                "targetLetterIndex": 5,
+                                "fontSize": 140,
+                                "color": "#00FFFF",
+                                "backgroundColor": "#110022",
+                                "audioSync": {
+                                    "override": true,
+                                    "enabled": true,
+                                    "type": "bass",
+                                    "reactivity": 2.0,
+                                    "property": "all"
+                                },
+                                "audioTimelineSync": true,
+                                "maxTimelineSpeed": 1.8,
+                                "minTimelineSpeed": 0.5,
+                                "timelineSmoothing": 0.9,
+                                "beatPause": true,
+                                "beatResume": true
+                            },
+                            "startFrame": 200,
+                            "durationInFrames": 180
+                        },
+                        {
+                            "component": "GSAPHingeZoom",
+                            "props": {
+                                "text": "NORMAL GSAP",
+                                "targetLetterIndex": 2,
+                                "fontSize": 120,
+                                "color": "#FFD700",
+                                "backgroundColor": "#001122",
+                                "audioTimelineSync": false
+                            },
+                            "startFrame": 400,
+                            "durationInFrames": 135
+                        }
+                    ],
+                    "audioConfig": {
+                        "audioUrl": "start-again.mp3",
+                        "volume": 0.9,
+                        "fadeIn": 1,
+                        "fadeOut": 2,
+                        "loop": true,
+                        "globalSync": {
+                            "enabled": true,
+                            "mode": "all",
+                            "defaultReactivity": 1.5,
+                            "masterIntensity": 1.0
+                        }
+                    }
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(audioTimelineJSON, null, 2);
         }
 
         // Load Letter Flickering test - multi-phase text animation

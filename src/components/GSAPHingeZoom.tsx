@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useSyncedGsap } from '../hooks/useSyncedGsap';
+import { useSyncedGsap, AudioTimelineConfig } from '../hooks/useSyncedGsap';
 import { gsap } from 'gsap';
 import { useAudioEnhancedProps, ComponentAudioSync } from '../hooks/useGlobalAudio';
 
@@ -16,8 +16,16 @@ interface GSAPHingeZoomProps {
   perspective?: number;
   transformOrigin?: string;
   
-  // Audio sync support
+  // Audio sync support (visual effects)
   audioSync?: ComponentAudioSync;
+  
+  // Audio timeline sync (GSAP timeline speed control)
+  audioTimelineSync?: boolean;     // Enable audio-reactive timeline speed
+  maxTimelineSpeed?: number;       // Maximum timeline speed multiplier (default: 2.0)
+  minTimelineSpeed?: number;       // Minimum timeline speed multiplier (default: 0.5)
+  timelineSmoothing?: number;      // Speed change smoothing (0-1, default: 0.8)
+  beatPause?: boolean;             // Pause timeline on strong beats
+  beatResume?: boolean;            // Resume timeline after beat pause
 }
 
 export const GSAPHingeZoom: React.FC<GSAPHingeZoomProps> = ({
@@ -33,7 +41,16 @@ export const GSAPHingeZoom: React.FC<GSAPHingeZoomProps> = ({
   perspective = 800,
   transformOrigin = "center top", // "transformOrigin: 'center top'" from GSAP
   
-  audioSync
+  // Audio sync
+  audioSync,
+  
+  // Audio timeline sync
+  audioTimelineSync = false,
+  maxTimelineSpeed = 2.0,
+  minTimelineSpeed = 0.5,
+  timelineSmoothing = 0.8,
+  beatPause = false,
+  beatResume = true
 }) => {
   // Get audio-enhanced properties
   const audioEnhanced = useAudioEnhancedProps('GSAPHingeZoom', audioSync);
@@ -42,6 +59,16 @@ export const GSAPHingeZoom: React.FC<GSAPHingeZoomProps> = ({
   // Apply audio enhancements
   const audioOpacityMultiplier = audioValues.opacityMultiplier || 1;
   const audioGlowIntensity = audioValues.glowIntensity || 0;
+  
+  // Audio timeline configuration
+  const audioTimelineConfig: AudioTimelineConfig = {
+    enabled: audioTimelineSync,
+    maxSpeed: maxTimelineSpeed,
+    minSpeed: minTimelineSpeed,
+    smoothing: timelineSmoothing,
+    beatPause,
+    beatResume
+  };
   
   // Create GSAP Timeline (EXACT MATCH to reference)
   const createTimeline = useCallback((element: HTMLDivElement) => {
@@ -82,7 +109,8 @@ export const GSAPHingeZoom: React.FC<GSAPHingeZoomProps> = ({
     return timeline;
   }, []);
 
-  const ref = useSyncedGsap(createTimeline);
+  // Enhanced useSyncedGsap with audio timeline support
+  const ref = useSyncedGsap(createTimeline, audioValues, audioTimelineConfig);
   
   // Split text into letters
   const letters = text.split('');
