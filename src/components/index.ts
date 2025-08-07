@@ -12,6 +12,8 @@ export { MorphSVGFixed as MorphSVG } from './MorphSVGFixed';
 export { DrawSVG } from './DrawSVG';
 export { HyperspaceText } from './HyperspaceText';
 export { GenerativeCanvas } from './GenerativeCanvas';
+export { LetterFlickering } from './LetterFlickering';
+export { GSAPHingeZoom } from './GSAPHingeZoom';
 export { MinimalTest } from './MinimalTest'; // Keep for testing
 
 // Audio Components - Type 1: Background Audio + Type 2: Audio-Synced
@@ -29,6 +31,8 @@ export const COMPONENT_REGISTRY = {
   DrawSVG: 'DrawSVG',               // ✅ NOW FAST - GSAP DrawSVGPlugin optimized
   HyperspaceText: 'HyperspaceText', // ✅ NEW - 3D hyperspace text effect with GSAP
   GenerativeCanvas: 'GenerativeCanvas', // ✅ NEW - Mathematical generative art with GSAP
+  LetterFlickering: 'LetterFlickering', // ✅ NEW - Multi-phase letter flickering animation with 3D rotation
+  GSAPHingeZoom: 'GSAPHingeZoom',       // ✅ NEW - TRUE GSAP hinge effect: word zoom → hinge → target letter zoom (EXACT reference match)
   MinimalTest: 'MinimalTest',       // ✅ FASTEST - For performance testing
   
   // Audio Components - NEW AUDIO INTEGRATION

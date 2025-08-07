@@ -39,13 +39,13 @@ export const useAudioAnalysis = (audioUrl?: string): AudioAnalysisResult => {
     isActive: false,
   };
   
+  // Load audio data (hooks must be called unconditionally)
+  const audioData = useAudioData(audioUrl || '');
+  
   // Return default immediately if no audio URL is provided
   if (!audioUrl || audioUrl.trim() === '') {
     return defaultResult;
   }
-  
-  // Load audio data only when we have a valid URL
-  const audioData = useAudioData(audioUrl);
   
   // Return default if audio data is not loaded yet
   if (!audioData) {
@@ -99,7 +99,6 @@ export const useAudioAnalysis = (audioUrl?: string): AudioAnalysisResult => {
       overall,
       spectrum: visualization,
       isBeat,
-      isStrongBeat,
       isActive,
     };
   } catch (error) {

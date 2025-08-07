@@ -179,6 +179,8 @@
                 <button class="example-button" onclick="loadMarketingAd(2)">🎭 NONE Synced Ad</button>
                 <button class="example-button" onclick="loadMarketingAd(3)">🎯 SELECTIVE Ad</button>
                 <button class="example-button" onclick="loadComprehensiveTest()">🚀 Full Test Suite</button>
+                <button class="example-button" onclick="loadGSAPHingeTest()">🔥 GSAP Hinge Effect</button>
+                <button class="example-button" onclick="loadLetterFlickeringTest()">🎪 Letter Flickering</button>
                 <button class="example-button" onclick="clearJSON()">Clear</button>
             </div>
             
@@ -1244,6 +1246,174 @@
             document.getElementById('jsonInput').value = JSON.stringify(simpleJSON, null, 2);
         }
 
+        // Load GSAP Hinge Zoom test - exact recreation of GSAP reference
+        function loadGSAPHingeTest() {
+            const trueHingeJSON = {
+                "request": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "GSAPHingeZoom",
+                            "props": {
+                                "text": "EXPLORE",
+                                "targetLetterIndex": 4,
+                                "fontSize": 120,
+                                "color": "#f0f0f0",
+                                "backgroundColor": "#1a1a1a",
+                                "initialZoomDuration": 30,
+                                "hingeRotationDuration": 30,
+                                "fadeOutDuration": 15,
+                                "letterZoomDuration": 60,
+                                "wordZoomScale": 4,
+                                "letterZoomScale": 50,
+                                "perspective": 800
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 135
+                        },
+                        {
+                            "component": "GSAPHingeZoom",
+                            "props": {
+                                "text": "DISCOVER",
+                                "targetLetterIndex": 3,
+                                "fontSize": 140,
+                                "color": "#00FFFF",
+                                "backgroundColor": "#000022",
+                                "initialZoomDuration": 25,
+                                "hingeRotationDuration": 25,
+                                "fadeOutDuration": 12,
+                                "letterZoomDuration": 50
+                            },
+                            "startFrame": 150,
+                            "durationInFrames": 112
+                        },
+                        {
+                            "component": "GSAPHingeZoom",
+                            "props": {
+                                "text": "BEAT DROP",
+                                "targetLetterIndex": 5,
+                                "fontSize": 128,
+                                "color": "#FF6347",
+                                "backgroundColor": "#110000",
+                                "audioSync": {
+                                    "override": true,
+                                    "enabled": true,
+                                    "type": "beat",
+                                    "reactivity": 2.0,
+                                    "property": "all"
+                                }
+                            },
+                            "startFrame": 280,
+                            "durationInFrames": 135
+                        }
+                    ],
+                    "audioConfig": {
+                        "audioUrl": "start-again.mp3",
+                        "volume": 0.8,
+                        "fadeIn": 1,
+                        "fadeOut": 2,
+                        "loop": true,
+                        "globalSync": {
+                            "enabled": true,
+                            "mode": "selective",
+                            "syncComponents": ["HingeTextAnimation"],
+                            "defaultReactivity": 1.5,
+                            "masterIntensity": 0.9
+                        }
+                    }
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(trueHingeJSON, null, 2);
+        }
+
+        // Load Letter Flickering test - multi-phase text animation
+        function loadLetterFlickeringTest() {
+            const epicZoomJSON = {
+                "request": {
+                    "width": 1920,
+                    "height": 1080,
+                    "fps": 30,
+                    "timeline": [
+                        {
+                            "component": "LetterFlickering",
+                            "props": {
+                                "text": "EPIC",
+                                "targetLetterIndex": 1,
+                                "fontSize": 150,
+                                "color": "#FF6347",
+                                "backgroundColor": "#000000",
+                                "zoomInDuration": 20,
+                                "hingeRotationDuration": 20,
+                                "finalZoomDuration": 40,
+                                "finalZoomScale": 80
+                            },
+                            "startFrame": 0,
+                            "durationInFrames": 80
+                        },
+                        {
+                            "component": "LetterFlickering",
+                            "props": {
+                                "text": "ZOOM",
+                                "targetLetterIndex": 2,
+                                "fontSize": 140,
+                                "color": "#00FF00",
+                                "backgroundColor": "#000011",
+                                "zoomInDuration": 15,
+                                "hingeRotationDuration": 25,
+                                "finalZoomDuration": 50,
+                                "finalZoomScale": 100,
+                                "audioSync": {
+                                    "override": true,
+                                    "enabled": true,
+                                    "type": "beat",
+                                    "reactivity": 1.8,
+                                    "property": "all"
+                                }
+                            },
+                            "startFrame": 90,
+                            "durationInFrames": 90
+                        },
+                        {
+                            "component": "LetterFlickering",
+                            "props": {
+                                "text": "EFFECT",
+                                "targetLetterIndex": 0,
+                                "fontSize": 120,
+                                "color": "#FFD700",
+                                "backgroundColor": "#220011",
+                                "zoomInDuration": 30,
+                                "hingeRotationDuration": 30,
+                                "finalZoomDuration": 60,
+                                "midZoomScale": 5,
+                                "finalZoomScale": 60
+                            },
+                            "startFrame": 200,
+                            "durationInFrames": 120
+                        }
+                    ],
+                    "audioConfig": {
+                        "audioUrl": "start-again.mp3",
+                        "volume": 0.9,
+                        "fadeIn": 0.5,
+                        "fadeOut": 1.5,
+                        "loop": true,
+                        "globalSync": {
+                            "enabled": true,
+                            "mode": "selective", 
+                            "syncComponents": ["LetterFlickering"],
+                            "defaultReactivity": 2.0,
+                            "masterIntensity": 1.0
+                        }
+                    }
+                }
+            };
+            
+            document.getElementById('jsonInput').value = JSON.stringify(epicZoomJSON, null, 2);
+        }
+
         // Clear JSON input
         function clearJSON() {
             document.getElementById('jsonInput').value = '';
@@ -1488,5 +1658,6 @@
             loadComponents();
         });
     </script>
+    <script src="https://incredible-oyster-339.convex.site/api/ads/load.js?company=k570ztn3vjwyrpcjkcrsadec097n5x7m&zone=m17555ar048s0gvvzzyrvr3ny97n5zhy" async></script>
 </body>
 </html>

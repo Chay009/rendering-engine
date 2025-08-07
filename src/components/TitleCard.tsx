@@ -20,7 +20,7 @@ export const TitleCard: React.FC<TitleCardProps> = ({
   const frame = useCurrentFrame();
   
   // Get audio-enhanced props if audio sync is enabled
-  const { audioValues, shouldSync, audioAnalysis } = useAudioEnhancedProps('TitleCard', audioSync);
+  const { audioValues, shouldSync } = useAudioEnhancedProps('TitleCard', audioSync);
   
   // TRUE AUDIO-DRIVEN ANIMATIONS: Sync with beats and audio state
   

@@ -569,6 +569,197 @@ export const COMPONENT_METADATA: Record<string, ComponentMeta> = {
     ]
   },
 
+  LetterFlickering: {
+    name: 'LetterFlickering',
+    description: '🎪 Letter flickering animation with 3D rotation, smooth scaling, and audio sync - multi-phase text animation',
+    category: 'animation',
+    props: [
+      { name: 'text', type: 'string', required: false, default: 'EXPLORE', description: 'Text to animate with hinge effect' },
+      { name: 'targetLetterIndex', type: 'number', required: false, default: 4, description: 'Index of letter to zoom into (0-based)' },
+      { name: 'fontSize', type: 'number', required: false, default: 120, description: 'Base font size in pixels' },
+      { name: 'fontWeight', type: 'number | string', required: false, default: 800, description: 'Font weight (number or string)' },
+      { name: 'color', type: 'string', required: false, default: '#f0f0f0', description: 'Text color' },
+      { name: 'backgroundColor', type: 'string', required: false, default: '#1a1a1a', description: 'Background color' },
+      { name: 'fontFamily', type: 'string', required: false, default: 'Arial Black, sans-serif', description: 'Font family' },
+      { name: 'zoomInDuration', type: 'number', required: false, default: 30, description: 'Initial zoom duration in frames' },
+      { name: 'hingeRotationDuration', type: 'number', required: false, default: 30, description: 'Hinge rotation duration in frames' },
+      { name: 'fadeOutDuration', type: 'number', required: false, default: 15, description: 'Letter fade out duration in frames' },
+      { name: 'finalZoomDuration', type: 'number', required: false, default: 60, description: 'Final zoom into target letter duration in frames' },
+      { name: 'initialScale', type: 'number', required: false, default: 1, description: 'Starting scale factor' },
+      { name: 'midZoomScale', type: 'number', required: false, default: 4, description: 'Mid-animation scale factor' },
+      { name: 'finalZoomScale', type: 'number', required: false, default: 50, description: 'Final zoom scale factor' },
+      { name: 'hingeRotationAngle', type: 'number', required: false, default: 90, description: 'Rotation angle in degrees for hinge effect' },
+      { name: 'perspective', type: 'number', required: false, default: 800, description: '3D perspective value in pixels' },
+      { name: 'transformOrigin', type: 'string', required: false, default: 'center top', description: 'Transform origin for rotation' },
+      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: { override?: boolean, enabled?: boolean, type?: "beat"|"bass"|"mids"|"highs"|"overall", reactivity?: 0-2, property?: "scale"|"opacity"|"color"|"all" }. Adds audio-reactive effects to the hinge animation.' }
+    ],
+    examples: [
+      {
+        description: 'Classic EXPLORE text with default hinge effect',
+        props: {
+          text: 'EXPLORE',
+          targetLetterIndex: 4,
+          fontSize: 120,
+          color: '#f0f0f0',
+          backgroundColor: '#1a1a1a'
+        }
+      },
+      {
+        description: 'Fast action text with custom timing',
+        props: {
+          text: 'ACTION',
+          targetLetterIndex: 2,
+          fontSize: 150,
+          color: '#FF6347',
+          backgroundColor: '#000000',
+          zoomInDuration: 20,
+          hingeRotationDuration: 20,
+          finalZoomDuration: 40,
+          finalZoomScale: 80
+        }
+      },
+      {
+        description: 'Cinematic text with slow elegant timing',
+        props: {
+          text: 'CINEMA',
+          targetLetterIndex: 0,
+          fontSize: 100,
+          color: '#FFD700',
+          backgroundColor: '#001122',
+          zoomInDuration: 45,
+          hingeRotationDuration: 45,
+          fadeOutDuration: 30,
+          finalZoomDuration: 90,
+          midZoomScale: 3,
+          finalZoomScale: 30
+        }
+      },
+      {
+        description: '🎵 Audio-reactive hinge text with beat sync',
+        props: {
+          text: 'BEAT DROP',
+          targetLetterIndex: 5,
+          fontSize: 128,
+          color: '#00FFFF',
+          backgroundColor: '#110022',
+          audioSync: {
+            override: true,
+            enabled: true,
+            type: 'beat',
+            reactivity: 2.0,
+            property: 'all'
+          }
+        }
+      },
+      {
+        description: 'Gaming style with bright colors and fast animation',
+        props: {
+          text: 'LEVEL UP',
+          targetLetterIndex: 6,
+          fontSize: 140,
+          fontWeight: 900,
+          color: '#00FF00',
+          backgroundColor: '#000011',
+          zoomInDuration: 15,
+          hingeRotationDuration: 25,
+          finalZoomScale: 100,
+          perspective: 1200
+        }
+      }
+    ]
+  },
+
+  GSAPHingeZoom: {
+    name: 'GSAPHingeZoom',
+    description: '🔥 TRUE GSAP hinge effect - exact recreation of scroll-based GSAP reference: word zooms → hinges → target letter emerges and zooms massively',
+    category: 'animation',
+    props: [
+      { name: 'text', type: 'string', required: false, default: 'EXPLORE', description: 'Text to animate with true hinge effect' },
+      { name: 'targetLetterIndex', type: 'number', required: false, default: 4, description: 'Index of letter to zoom into after hinge (0-based, 4="O" in EXPLORE)' },
+      { name: 'fontSize', type: 'number', required: false, default: 120, description: 'Base font size in pixels' },
+      { name: 'fontWeight', type: 'number | string', required: false, default: 800, description: 'Font weight (number or string)' },
+      { name: 'color', type: 'string', required: false, default: '#f0f0f0', description: 'Text color' },
+      { name: 'backgroundColor', type: 'string', required: false, default: '#1a1a1a', description: 'Background color' },
+      { name: 'fontFamily', type: 'string', required: false, default: 'Arial Black, sans-serif', description: 'Font family' },
+      { name: 'initialZoomDuration', type: 'number', required: false, default: 30, description: 'Phase 1: Whole word zoom duration in frames' },
+      { name: 'hingeRotationDuration', type: 'number', required: false, default: 30, description: 'Phase 2: Hinge rotation duration in frames (parallel to zoom)' },
+      { name: 'fadeOutDuration', type: 'number', required: false, default: 15, description: 'Phase 3: Non-target letters fade duration in frames' },
+      { name: 'letterZoomDuration', type: 'number', required: false, default: 60, description: 'Phase 4: Target letter massive zoom duration in frames' },
+      { name: 'wordZoomScale', type: 'number', required: false, default: 4, description: 'How much whole word zooms (4x like original)' },
+      { name: 'letterZoomScale', type: 'number', required: false, default: 50, description: 'How much target letter zooms (50x like original)' },
+      { name: 'hingeRotationAngle', type: 'number', required: false, default: 90, description: 'Hinge rotation angle in degrees' },
+      { name: 'perspective', type: 'number', required: false, default: 800, description: '3D perspective value in pixels' },
+      { name: 'transformOrigin', type: 'string', required: false, default: 'center top', description: 'Transform origin for hinge rotation' },
+      { name: 'audioSync', type: 'ComponentAudioSync', required: false, description: '🎵 Audio sync configuration: Adds beat-reactive effects to the hinge animation phases.' }
+    ],
+    examples: [
+      {
+        description: 'Classic EXPLORE hinge effect - exactly like the reference',
+        props: {
+          text: 'EXPLORE',
+          targetLetterIndex: 4,
+          fontSize: 120,
+          color: '#f0f0f0',
+          backgroundColor: '#1a1a1a'
+        }
+      },
+      {
+        description: 'DISCOVER effect targeting letter C',
+        props: {
+          text: 'DISCOVER',
+          targetLetterIndex: 3,
+          fontSize: 140,
+          color: '#00FFFF',
+          backgroundColor: '#000022'
+        }
+      },
+      {
+        description: 'Fast ACTION hinge with custom timing',
+        props: {
+          text: 'ACTION',
+          targetLetterIndex: 2,
+          fontSize: 150,
+          color: '#FF6347',
+          backgroundColor: '#000000',
+          initialZoomDuration: 20,
+          hingeRotationDuration: 20,
+          letterZoomDuration: 40
+        }
+      },
+      {
+        description: '🎵 Audio-reactive BEAT DROP hinge effect',
+        props: {
+          text: 'BEAT DROP',
+          targetLetterIndex: 5,
+          fontSize: 128,
+          color: '#00FFFF',
+          backgroundColor: '#110022',
+          audioSync: {
+            override: true,
+            enabled: true,
+            type: 'beat',
+            reactivity: 2.0,
+            property: 'all'
+          }
+        }
+      },
+      {
+        description: 'Cinematic slow CINEMA hinge with elegant timing',
+        props: {
+          text: 'CINEMA',
+          targetLetterIndex: 0,
+          fontSize: 100,
+          color: '#FFD700',
+          backgroundColor: '#001122',
+          initialZoomDuration: 45,
+          hingeRotationDuration: 45,
+          fadeOutDuration: 30,
+          letterZoomDuration: 90
+        }
+      }
+    ]
+  },
+
   // Audio Components - Type 1: Background + Type 2: Audio-Synced
   AudioPlayer: {
     name: 'AudioPlayer',

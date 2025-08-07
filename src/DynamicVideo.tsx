@@ -14,6 +14,7 @@ const DynamicVideo: React.FC<VideoRequest> = ({ timeline, audioConfig }) => {
   console.log('🎬 DynamicVideo received timeline:', JSON.stringify(timeline, null, 2));
   console.log('🎵 DynamicVideo received audioConfig:', JSON.stringify(audioConfig, null, 2));
   console.log('🎬 Timeline length:', timeline?.length || 0);
+  console.log('🔧 Available components:', Object.keys(Components));
   
   // Prepare global audio configuration
   const globalAudioConfig = {

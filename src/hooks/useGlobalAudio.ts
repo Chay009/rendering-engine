@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { useGlobalAudio, type GlobalAudioSync } from '../components/GlobalAudioProvider';
+import { useGlobalAudio } from '../components/GlobalAudioProvider';
 
 /**
  * Component Audio Sync Configuration
@@ -90,7 +90,7 @@ export const useAudioEnhancedProps = (
       
       // Enhanced beat-driven triggers
       beatTrigger: audioAnalysis.isBeat,
-      strongBeatTrigger: audioAnalysis.isStrongBeat || false,
+      strongBeatTrigger: false,
       beatStrength: enhancedIntensity,
       
       // Amplified frequency-specific values

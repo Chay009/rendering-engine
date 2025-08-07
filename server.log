@@ -1,0 +1,69 @@
+
+> render-engine@1.0.0 dev
+> tsx watch server
+
+🚀 PRODUCTION OPTIMIZATION: Starting server with pre-warmed resources...
+Bundling Remotion project: 6%
+Bundling Remotion project: 23.75%
+Bundling Remotion project: 37%
+Bundling Remotion project: 62.8%
+Bundling Remotion project: 69%
+Bundling Remotion project: 74.49%
+Bundling Remotion project: 79.62%
+Bundling Remotion project: 84.74%
+Bundling Remotion project: 89.87%
+Bundling Remotion project: 95%
+Bundling Remotion project: 100%
+🔥 Pre-warming browser instance...
+✅ Browser pre-warmed in: 264ms
+📋 Pre-caching composition...
+🔍 Raw cached composition includes defaultProps: true
+🧹 Cleaned composition (no defaultProps): {
+  "id": "DynamicVideo",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "durationInFrames": 600,
+  "defaultCodec": null,
+  "defaultOutName": null,
+  "defaultVideoImageFormat": null,
+  "defaultPixelFormat": null
+}
+✅ Composition cached in: 1818ms
+🚀 PRODUCTION SERVER READY on port 3000
+⚡ Browser instance: PRE-WARMED
+📋 Composition cache: LOADED
+🔥 Ready for ultra-fast rendering!
+9:40:11 am [tsx] change in ./src\components\registry.ts Restarting...
+c🚀 PRODUCTION OPTIMIZATION: Starting server with pre-warmed resources...
+Bundling Remotion project: 6%
+Bundling Remotion project: 23.75%
+Bundling Remotion project: 50.09%
+Bundling Remotion project: 65%
+Bundling Remotion project: 70.64%
+Bundling Remotion project: 75.77%
+Bundling Remotion project: 80.9%
+Bundling Remotion project: 87.31%
+Bundling Remotion project: 92.44%
+Bundling Remotion project: 98%
+Bundling Remotion project: 100%
+🔥 Pre-warming browser instance...
+✅ Browser pre-warmed in: 304ms
+📋 Pre-caching composition...
+🔍 Raw cached composition includes defaultProps: true
+🧹 Cleaned composition (no defaultProps): {
+  "id": "DynamicVideo",
+  "width": 1920,
+  "height": 1080,
+  "fps": 30,
+  "durationInFrames": 600,
+  "defaultCodec": null,
+  "defaultOutName": null,
+  "defaultVideoImageFormat": null,
+  "defaultPixelFormat": null
+}
+✅ Composition cached in: 1783ms
+🚀 PRODUCTION SERVER READY on port 3000
+⚡ Browser instance: PRE-WARMED
+📋 Composition cache: LOADED
+🔥 Ready for ultra-fast rendering!
