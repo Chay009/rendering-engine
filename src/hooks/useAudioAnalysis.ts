@@ -84,9 +84,9 @@ export const useAudioAnalysis = (audioUrl?: string): AudioAnalysisResult => {
     
     // Enhanced beat detection with dynamic thresholds
     const beatThreshold = 0.15; // Lowered threshold for better beat detection
-    const strongBeatThreshold = 0.3;
+    // const strongBeatThreshold = 0.3; // TODO: Use for strong beat detection
     const isBeat = bass > beatThreshold;
-    const isStrongBeat = bass > strongBeatThreshold;
+    // const isStrongBeat = bass > strongBeatThreshold; // TODO: Use for enhanced beat detection
     
     // Activity detection
     const activityThreshold = 0.1;
